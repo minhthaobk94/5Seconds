@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
@@ -27,27 +27,47 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">Start Bootstrap</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-            </ul>
+        <div class="col-xl-4">
+            <a class="navbar-brand text-warning" href="#"><h3>5Seconds</h3></a>
+        </div>
+        <div class="col-xl-4">
+            <form class="navbar-form" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q"/>
+                    <div class="input-group-btn">
+                        <span class="btn btn-warning" type="submit"><i class="fa fa-search"
+                                                                       aria-hidden="true"></i></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-xl-4">
+            <div class="collapse navbar-collapse float-right" id="navbarResponsive">
+                <a class="btn btn-secondary" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" style="position: relative">
+                    <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
+                    <h6><span class="badge badge-pill badge-warning pull-right" style="position: absolute">4</span></h6>
+                </a>
+                <form class="dropdown-menu p-4">
+                    <div class="form-group">
+                        <label for="exampleDropdownFormEmail2">Email address</label>
+                        <input type="email" class="form-control" id="exampleDropdownFormEmail2"
+                               placeholder="email@example.com"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleDropdownFormPassword2">Password</label>
+                        <input type="password" class="form-control" id="exampleDropdownFormPassword2"
+                               placeholder="Password"/>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input"/>
+                            Remember me
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                </form>
+            </div>
         </div>
     </div>
 </nav>
@@ -58,14 +78,20 @@
     <div class="row">
 
         <div class="col-lg-3">
-
-            <h1 class="my-4">Shop Name</h1>
             <div class="list-group">
-                <a href="#" class="list-group-item">Category 1</a>
-                <a href="#" class="list-group-item">Category 2</a>
-                <a href="#" class="list-group-item">Category 3</a>
+                <a href="#" class="list-group-item active">
+                    <span class="fa fa-cutlery fa-fw"></span> Pictures <span class="badge pull-right">25</span>
+                </a>
+                <a href="#" class="list-group-item">
+                    <span class="fa fa-car fa-fw"></span> Documents <span class="badge pull-right">145</span>
+                </a>
+                <a href="#" class="list-group-item">
+                    <span class="fa fa-coffee fa-fw"></span> Music <span class="badge pull-right">50</span>
+                </a>
+                <a href="#" class="list-group-item">
+                    <span class="fa fa-film fa-fw"></span> Videos <span class="badge pull-right">8</span>
+                </a>
             </div>
-
         </div>
         <!-- /.col-lg-3 -->
 
@@ -108,7 +134,8 @@
                                 <a href="#">Item One</a>
                             </h4>
                             <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
+                                aspernatur!</p>
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -124,7 +151,8 @@
                                 <a href="#">Item Two</a>
                             </h4>
                             <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
+                                aspernatur! Lorem ipsum dolor sit amet.</p>
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -140,7 +168,8 @@
                                 <a href="#">Item Three</a>
                             </h4>
                             <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
+                                aspernatur!</p>
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -156,7 +185,8 @@
                                 <a href="#">Item Four</a>
                             </h4>
                             <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
+                                aspernatur!</p>
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -172,7 +202,8 @@
                                 <a href="#">Item Five</a>
                             </h4>
                             <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
+                                aspernatur! Lorem ipsum dolor sit amet.</p>
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -188,7 +219,8 @@
                                 <a href="#">Item Six</a>
                             </h4>
                             <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
+                                aspernatur!</p>
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
