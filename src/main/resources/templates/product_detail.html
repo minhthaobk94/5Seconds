@@ -43,7 +43,7 @@
 
         <div class="col-md-4">
             <h3 class="my-3" th:text="${product.getProductName()}"></h3>
-            <span class="badge badge-success" th:text="${product.getCategory().getTitle()}"></span>
+            <span class="badge badge-success" th:text="${product.getPrice()}"></span>
             <!--Price and cart here-->
             <div class="dropdown-divider"></div>
             <h3 class="my-3" th:text="Description"></h3>
@@ -60,10 +60,13 @@
         <div class="col-md-3 col-sm-6 mb-4" th:each="relative_product : ${relative_products}">
 
             <div class="card h-100">
-                <a th:href="@{'/products/' + ${relative_product.getId()}}"><img class="card-img-top" th:src="${relative_product.getImgUrl()}" alt=""/></a>
+                <a th:href="@{'/products/' + ${relative_product.getId()}}">
+                    <img class="card-img-top" th:src="${relative_product.getImgUrl()}" alt=""/>
+                </a>
                 <div class="card-body">
                     <h4 class="card-title">
-                        <a th:href="@{'/products/' + ${relative_product.getId()}}" th:text="${relative_product.getProductName()}"></a>
+                        <a th:href="@{'/products/' + ${relative_product.getId()}}"
+                           th:text="${relative_product.getProductName()}"></a>
                     </h4>
                     <h5 th:text="${relative_product.getPrice()}"></h5>
                     <p class="card-text" th:text="${relative_product.getDescription()}"></p>

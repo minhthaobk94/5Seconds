@@ -21,7 +21,7 @@ public class ProductController {
     @RequestMapping(value = "/products/{productId}", method = RequestMethod.GET)
     public String showClickedProductDetail(Map<String, Object> model, @PathVariable("productId") Integer productId) {
         model.put("categories", categoryService.findAll());
-        model.put("category", productService.findOne(productId).getCategory());
+        model.put("categoryId", productService.findOne(productId).getCategory().getId());
         model.put("product", productService.findOne(productId));
         model.put("relative_products", productService.findDistinctByIdNotIn(productId));
         return "product_detail";

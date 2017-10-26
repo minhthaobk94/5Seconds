@@ -48,8 +48,10 @@
         </div>
     </nav>
 
-    <nav class="nav navbar-expand-lg navbar-light bg-faded justify-content-center">
-        <a class="nav-link" th:each="category : ${categories}" th:href=" @{'/products/category/' + ${category.getId()}}"
+    <nav class="nav nav-pills navbar-expand-lg navbar-light bg-faded justify-content-center">
+        <a class="nav-link" th:each="category : ${categories}"
+           th:classappend="${category.getId() == catId ||  category.getId() == categoryId ? 'active' : ''}"
+           th:href=" @{'/products/category/' + ${category.getId()}}"
            th:text="${category.getTitle()}"></a>
     </nav>
 </header>
