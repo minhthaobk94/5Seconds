@@ -27,4 +27,9 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> findDistinctByIdNotIn(Integer id) {
         return productRepository.findDistinctByIdNotIn(id);
     }
+
+    @Override
+    public List<Product> findByProductNameContaining(String q) {
+        return productRepository.findByProductNameContaining(q);
+    }
 }
