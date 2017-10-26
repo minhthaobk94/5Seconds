@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Product Detail | 5Seconds</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+
+    <!-- Custom styles for this template -->
+    <link href="../../css/portfolio-item.css" rel="stylesheet"/>
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<div th:replace="fragments/header :: header"></div>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Portfolio Item Heading -->
+    <!--<h1 class="my-4">Page Heading-->
+    <!--<small>Secondary Text</small>-->
+    <!--</h1>-->
+
+    <!-- Portfolio Item Row -->
+    <div class="row">
+
+        <div class="col-md-8">
+            <img class="img-fluid" th:src="${product.getImgUrl()}" alt=""/>
+        </div>
+
+        <div class="col-md-4">
+            <h3 class="my-3" th:text="${product.getProductName()}"></h3>
+            <span class="badge badge-success" th:text="${product.getCategory().getTitle()}"></span>
+            <!--Price and cart here-->
+            <div class="dropdown-divider"></div>
+            <h3 class="my-3" th:text="Description"></h3>
+            <p th:text="${product.getDescription()}"></p>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <!-- Related Projects Row -->
+    <h3 class="my-4">Other products</h3>
+
+    <div class="row">
+
+        <div class="col-md-3 col-sm-6 mb-4" th:each="relative_product : ${relative_products}">
+            <a th:href="@{'/products/' + ${relative_product.getId()}}">
+                <img class="img-fluid" th:src="${relative_product.getImgUrl()}" alt=""/>
+            </a>
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<div th:replace="fragments/footer :: footer"></div>
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
