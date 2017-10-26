@@ -4,6 +4,7 @@ import com.thaontm.project.Seconds.model.Product;
 import com.thaontm.project.Seconds.repository.ProductRepository;
 import com.thaontm.project.Seconds.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,16 +21,16 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> findAll() {
-        return (List<Product>) productRepository.findAll();
+        return (List<Product>) productRepository.findAll(new Sort(Sort.Direction.DESC, "productName"));
     }
 
     @Override
     public List<Product> findDistinctByIdNotIn(Integer id) {
-        return productRepository.findDistinctByIdNotIn(id);
+        return productRepository.findDistinctByIdNotIn(id, new Sort(Sort.Direction.DESC, "productName"));
     }
 
     @Override
     public List<Product> findByProductNameContaining(String q) {
-        return productRepository.findByProductNameContaining(q);
+        return productRepository.findByProductNameContaining(q, new Sort(Sort.Direction.DESC, "productName"));
     }
 }

@@ -4,6 +4,7 @@ import com.thaontm.project.Seconds.model.Category;
 import com.thaontm.project.Seconds.repository.CategoryRepository;
 import com.thaontm.project.Seconds.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> findAll() {
-        return (List<Category>) categoryRepository.findAll();
+        return (List<Category>) categoryRepository.findAll(new Sort(Sort.Direction.DESC, "title"));
     }
 
     @Override
