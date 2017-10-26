@@ -6,6 +6,10 @@ import java.util.List;
 
 public interface ProductService {
     Product findOne(Integer id);
+
     List<Product> findAll();
+
     List<Product> findDistinctByIdNotIn(Integer id);
+
+    List<Product> findByProductNameContaining(String q);
 }

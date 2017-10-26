@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ProductRepository extends PagingAndSortingRepository<Product, Integer> {
     List<Product> findDistinctByIdNotIn(Integer id);
+
+    List<Product> findByProductNameContaining(String q);
 }
