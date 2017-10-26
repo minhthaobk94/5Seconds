@@ -33,7 +33,7 @@ public class Category {
     }
 
     public String getTitle() {
-        return title;
+        return title.toUpperCase();
     }
 
     public void setTitle(String title) {

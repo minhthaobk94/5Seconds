@@ -1,18 +1,55 @@
-<nav xmlns:th="http://www.thymeleaf.org" class="navbar  navbar-inverse  navbar-fixed-top" th:fragment="header">
-    <div class="container">
-        <button type="button" class="navbar-toggle"
-                data-toggle="collapse"
-                data-target=".navbar-collapse">
-            <span class="sr-only"> Toggle navigation</span>
-            <span class="icon-bar"> </span>
-            <span class="icon-bar"> </span>
-            <span class="icon-bar"> </span>
-        </button>
+<header xmlns:th="http://www.thymeleaf.org" th:name="header">
 
-        <a class="navbar-brand" href="#">5Seconds</a>
-
-        <div class="nav navbar-nav navbar-right">
-
+    <nav class="navbar navbar-expand-xl navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <div class="col-xl-4">
+                <a class="navbar-brand text-warning" href="/"><h3>5Seconds</h3></a>
+            </div>
+            <div class="col-xl-4">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q"/>
+                        <div class="input-group-btn">
+                        <span class="btn btn-warning" type="submit"><i class="fa fa-search"
+                                                                       aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xl-4">
+                <div class="collapse navbar-collapse float-right" id="navbarResponsive">
+                    <a class="btn btn-secondary" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false" style="position: relative">
+                        <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
+                        <h6><span class="badge badge-pill badge-warning pull-right" style="position: absolute">4</span>
+                        </h6>
+                    </a>
+                    <form class="dropdown-menu p-4">
+                        <div class="form-group">
+                            <label for="exampleDropdownFormEmail2">Email address</label>
+                            <input type="email" class="form-control" id="exampleDropdownFormEmail2"
+                                   placeholder="email@example.com"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleDropdownFormPassword2">Password</label>
+                            <input type="password" class="form-control" id="exampleDropdownFormPassword2"
+                                   placeholder="Password"/>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input"/>
+                                Remember me
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+
+    <nav class="nav navbar-expand-lg navbar-light bg-faded justify-content-center">
+        <a class="nav-link" th:each="category : ${categories}" th:href=" @{'/products/category/' + ${category.getId()}}"
+           th:text="${category.getTitle()}"></a>
+    </nav>
+</header>

@@ -1,5 +1,7 @@
 package com.thaontm.project.Seconds.model;
 
+import com.thaontm.project.Seconds.utils.Constants;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,13 +15,13 @@ public class Product {
     @JoinColumn(name = "cat_id")
     private Category category;
 
-    @Column(name = "product_name")
-    private String product_name;
+    @Column(name = "productName")
+    private String productName;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "imgUrl")
+    @Column(name = "img_url")
     private String imgUrl;
 
     @Column(name = "price")
@@ -28,9 +30,9 @@ public class Product {
     public Product() {
     }
 
-    public Product(Category category, String product_name, String description, String imgUrl, double price) {
+    public Product(Category category, String productName, String description, String imgUrl, double price) {
         this.category = category;
-        this.product_name = product_name;
+        this.productName = productName;
         this.description = description;
         this.imgUrl = imgUrl;
         this.price = price;
@@ -52,12 +54,12 @@ public class Product {
         this.category = category;
     }
 
-    public String getProduct_name() {
-        return product_name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public String getDescription() {
@@ -69,7 +71,10 @@ public class Product {
     }
 
     public String getImgUrl() {
-        return imgUrl;
+        if (imgUrl != null && !imgUrl.isEmpty()) {
+            return imgUrl;
+        }
+        return Constants.IMG_URL_DEFAULT;
     }
 
     public void setImgUrl(String imgUrl) {
