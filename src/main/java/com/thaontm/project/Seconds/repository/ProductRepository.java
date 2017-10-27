@@ -13,7 +13,7 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, I
 
     List<Product> findByProductNameContaining(String q, Sort sort);
 
-    Page<Product> findByProductNameContaining(String q, Pageable pageable);
+    Page<Product> findByProductNameContaining(String q, Sort sort, Pageable pageable);
 
     @Override
     Page<Product> findAll(Pageable pageable);
