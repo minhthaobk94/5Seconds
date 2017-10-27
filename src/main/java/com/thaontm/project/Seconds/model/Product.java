@@ -12,7 +12,7 @@ public class Product {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "cat_id")
+    @JoinColumn(name = "cat_id", referencedColumnName = "id")
     private Category category;
 
     @Column(name = "productName")
