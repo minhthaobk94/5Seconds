@@ -43,6 +43,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<Product> findByProductNameContaining(String q, Pageable pageable) {
-        return productRepository.findByProductNameContaining(q,new Sort(Sort.Direction.DESC, "productName"), pageable);
+        return (Page<Product>)productRepository.findByProductNameContaining(q, pageable);
     }
 }

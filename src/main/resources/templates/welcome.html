@@ -65,6 +65,7 @@
                     <a th:href="@{'/products/' + ${product.getId()}}">
                         <img class="card-img-top" th:src="${product.getImgUrl()}" alt=""/>
                     </a>
+                    <span id="btnAddToCart" class="float-right"><a class="btn btn-success" th:href="@{'/addToCart/' + ${product.getId()}}">Add to cart</a></span>
                     <div class="card-body">
                         <h4 class="card-title">
                             <a th:href="@{'/products/' + ${product.getId()}}"
