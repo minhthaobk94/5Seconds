@@ -7,6 +7,11 @@ public class CartDTO {
     private double price;
     private int quantity;
 
+    public CartDTO(int productId, int quantity) {
+        this.productId = productId;
+        this.quantity = quantity;
+    }
+
     public CartDTO(int productId) {
         this.productId = productId;
     }
