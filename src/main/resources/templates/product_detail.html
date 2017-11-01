@@ -39,6 +39,7 @@
         <div class="col-md-4">
             <h3 class="my-3" th:text="${product.getProductName()}"></h3>
             <span class="badge badge-success" th:text="${product.getPrice()}"></span>
+            <span id="btnAddToCart" class="float-right"><a class="btn btn-success" th:href="@{'/addToCart/' + ${product.getId()}}">Add to cart</a></span>
             <!--Price and cart here-->
             <div class="dropdown-divider"></div>
             <h3 class="my-3" th:text="Description"></h3>

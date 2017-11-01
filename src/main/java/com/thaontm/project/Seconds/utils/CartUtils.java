@@ -70,4 +70,9 @@ public class CartUtils {
             this.cartItems = new ArrayList<>();
         }
     }
+
+    public void removeCartItem(Product product) {
+        CartItemDTO cartItemDTO = getCartItem(product.getId());
+        cartItems.remove(cartItemDTO);
+    }
 }

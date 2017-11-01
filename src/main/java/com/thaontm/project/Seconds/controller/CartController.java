@@ -34,4 +34,10 @@ public class CartController {
         CartUtils.getInstance(session).checkout();
         return "redirect:/";
     }
+
+    @RequestMapping(value = "/cart/remove/{productId}", method = RequestMethod.GET)
+    public String removeCartItem(HttpSession session, @PathVariable("productId") Integer productId) {
+        CartUtils.getInstance(session).removeCartItem(productService.findOne(productId));
+        return "redirect:/cart";
+    }
 }

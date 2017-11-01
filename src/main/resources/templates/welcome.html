@@ -65,7 +65,6 @@
                     <a th:href="@{'/products/' + ${product.getId()}}">
                         <img class="card-img-top" th:src="${product.getImgUrl()}" alt=""/>
                     </a>
-                    <span id="btnAddToCart" class="float-right"><a class="btn btn-success" th:href="@{'/addToCart/' + ${product.getId()}}">Add to cart</a></span>
                     <div class="card-body">
                         <h4 class="card-title">
                             <a th:href="@{'/products/' + ${product.getId()}}"
@@ -74,9 +73,8 @@
                         <h5 th:text="${product.getPrice()}"></h5>
                         <p class="card-text" th:text="${product.getDescription()}"></p>
                     </div>
-                    <div class="card-footer">
-                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                    </div>
+                    <a id="btnAddToCart" class="btn btn-success" th:href="@{'/addToCart/' + ${product.getId()}}">Add to cart</a>
+
                 </div>
             </div>
 
