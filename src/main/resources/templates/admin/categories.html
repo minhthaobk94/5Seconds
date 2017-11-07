@@ -24,20 +24,28 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="index.html">Dashboard</a>
+                <a th:href="@{/admin/dashboard}">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">Blank Page</li>
+            <li class="breadcrumb-item active">
+                <a th:href="@{/admin/category}">Category</a>
+            </li>
         </ol>
-        <div class="row">
-            <div class="col-12">
-                <h1>Blank</h1>
-                <p>This is an example of a blank page that you can use as a starting point for creating new ones.</p>
+        <!--List categories-->
+        <div class="list-group" th:each="category : ${categories}">
+            <div class="list-group-item list-group-item-action">
+                <span class="col-xl-10 " th:text="${category.getTitle()}"></span>
+                <a class="btn btn-warning float-right" role="button"
+                   th:href="@{'/admin/category/update/' + ${category.getId()}}"><i class="fa fa-pencil"
+                                                                                   aria-hidden="true"></i></a>
             </div>
+
         </div>
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
+    <!--footer-->
     <div th:replace="fragments/admin_footer :: footer"></div>
+
     <!-- Bootstrap core JavaScript-->
     <script src="../../js/jquery.min.js"></script>
     <script src="../../js/bootstrap.bundle.min.js"></script>

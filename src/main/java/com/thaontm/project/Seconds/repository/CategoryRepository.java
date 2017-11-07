@@ -9,4 +9,5 @@ public interface CategoryRepository extends PagingAndSortingRepository<Category,
 
     @Override
     Iterable<Category> findAll(Sort sort);
+
 }
