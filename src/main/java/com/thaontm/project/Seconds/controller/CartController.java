@@ -20,24 +20,28 @@ public class CartController {
     public String showCart(Map<String, Object> model, HttpSession session) {
         model.put("cart", CartUtils.getInstance(session).getCartItems());
         model.put("cartTotalPrice", CartUtils.getInstance(session).getTotalPrice());
+        model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());
         return "cart";
     }
 
     @RequestMapping(value = "/addToCart/{productId}", method = RequestMethod.GET)
     public String addToCart(Map<String, Object> model, HttpSession session, @PathVariable("productId") Integer productId) {
         CartUtils.getInstance(session).addToCart(productService.findOne(productId));
+        model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());
         return "redirect:/";
     }
 
     @RequestMapping(value = "/checkout", method = RequestMethod.GET)
-    public String checkout(HttpSession session) {
+    public String checkout(Map<String, Object> model, HttpSession session) {
         CartUtils.getInstance(session).checkout();
+        model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());
         return "redirect:/";
     }
 
     @RequestMapping(value = "/cart/remove/{productId}", method = RequestMethod.GET)
-    public String removeCartItem(HttpSession session, @PathVariable("productId") Integer productId) {
+    public String removeCartItem(Map<String, Object> model, HttpSession session, @PathVariable("productId") Integer productId) {
         CartUtils.getInstance(session).removeCartItem(productService.findOne(productId));
+        model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());
         return "redirect:/cart";
     }
 }

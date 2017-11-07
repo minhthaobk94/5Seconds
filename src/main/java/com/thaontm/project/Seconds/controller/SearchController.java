@@ -1,6 +1,7 @@
 package com.thaontm.project.Seconds.controller;
 
 import com.thaontm.project.Seconds.service.ProductService;
+import com.thaontm.project.Seconds.utils.CartUtils;
 import com.thaontm.project.Seconds.utils.Constants;
 import com.thaontm.project.Seconds.utils.PaginationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @Controller
@@ -19,7 +21,7 @@ public class SearchController {
     private ProductService productService;
 
     @RequestMapping(value = "/search/", method = RequestMethod.GET)
-    public String search(Map<String, Object> model, @RequestParam(name = "q", defaultValue = "") String q, @PageableDefault(page = 0, size = 12)Pageable pageable) {
+    public String search(Map<String, Object> model, @RequestParam(name = "q", defaultValue = "") String q, @PageableDefault(page = 0, size = 12)Pageable pageable, HttpSession session) {
         if (!q.isEmpty()) {
             model.put("totalPages", PaginationUtils.calculateTotalPages(productService.findByProductNameContaining(q).size(), Constants.PAGE_SIZE));
             model.put("products", productService.findByProductNameContaining(q, pageable));
@@ -29,6 +31,7 @@ public class SearchController {
         }
         model.put("pageSize", Constants.PAGE_SIZE);
         model.put("query", q);
+        model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());
         return "search_result";
     }
 }

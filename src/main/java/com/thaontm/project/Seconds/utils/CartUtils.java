@@ -75,4 +75,12 @@ public class CartUtils {
         CartItemDTO cartItemDTO = getCartItem(product.getId());
         cartItems.remove(cartItemDTO);
     }
+
+    public int getItemsQuantity() {
+        int quantity = 0;
+        for (CartItemDTO cartItemDTO : this.cartItems) {
+            quantity += cartItemDTO.getQuantity();
+        }
+        return quantity;
+    }
 }
