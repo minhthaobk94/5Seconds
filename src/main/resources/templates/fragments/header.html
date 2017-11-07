@@ -17,10 +17,11 @@
                 </form>
             </div>
             <div class="col-xl-4">
-                <a id="navbarResponsive" class="nav-link dropdown-toggle mr-lg-2 float-right btn btn-info" aria-haspopup="true"
+                <a id="navbarResponsive" class="nav-link float-right btn btn-info" aria-haspopup="true"
                    aria-expanded="false" style="position: relative" th:href="@{'/cart'}">
                     <i class="fa fa-shopping-cart fa-lg" data-toggle="dropdown" aria-hidden="true"></i>
-                    <h6><span class="badge badge-pill badge-warning pull-right" style="position: absolute" th:text="${itemsQuantity}"></span>
+                    <h6><span class="badge badge-pill badge-warning pull-right" style="position: absolute"
+                              th:text="${itemsQuantity}"></span>
                     </h6>
                 </a>
                 <!--<form class="dropdown-menu p-4"> -->
@@ -45,11 +46,12 @@
             </div>
         </div>
     </nav>
-
-    <nav class="nav nav-pills navbar-expand-lg navbar-light bg-faded justify-content-center">
-        <a class="nav-link" th:each="category : ${categories}"
-           th:classappend="${category.getId() == catId ||  category.getId() == categoryId ? 'active' : ''}"
-           th:href=" @{'/products/category/' + ${category.getId()}}"
-           th:text="${category.getTitle()}"></a>
-    </nav>
+    <div class="container">
+        <nav class="nav nav-pills navbar-expand-lg navbar-light bg-faded justify-content-center">
+            <a class="nav-link" th:each="category : ${categories}"
+               th:classappend="${category.getId() == catId ||  category.getId() == categoryId ? 'active' : ''}"
+               th:href=" @{'/products/category/' + ${category.getId()}}"
+               th:text="${category.getTitle()}"></a>
+        </nav>
+    </div>
 </header>
