@@ -17,25 +17,37 @@ public class AdminCategoryController {
     @Autowired
     CategoryService categoryService;
 
-    @RequestMapping("/category")
+    @RequestMapping(value = "/category", method = RequestMethod.GET)
     public String getCategories(Map<String, Object> model) {
         model.put("categories", categoryService.findAll());
         return "/admin/categories";
     }
 
+    @RequestMapping(value = "/category/add/", method = RequestMethod.POST)
+    public String addCategory(@RequestParam String title) {
+        categoryService.save(new Category(title, null));
+        return "redirect:/admin/category";
+    }
+
     @RequestMapping(value = "/category/update/{catId}", method = RequestMethod.GET)
     public String showUpdateCategory(Map<String, Object> model, @PathVariable("catId") Integer catId) {
         model.put("category", categoryService.findOne(catId));
-        return "/admin/create_category";
+        return "/admin/update_category";
     }
 
-    @RequestMapping(value = "/category/update/{catId}", method = RequestMethod.PUT)
-    public String updateCategory(Map<String, Object> model, @RequestParam Integer catId, @RequestParam String title) {
+    @RequestMapping(value = "/category/update/{catId}", method = RequestMethod.POST)
+    public String updateCategory(@RequestParam Integer catId, @RequestParam String title) {
         Category category = new Category();
         category.setId(catId);
         category.setTitle(title);
         category.setProducts(categoryService.findOne(catId).getProducts());
         categoryService.save(category);
-        return "redirect:/admin/categories";
+        return "redirect:/admin/category";
+    }
+
+    @RequestMapping(value = "/category/update/{catId}", method = RequestMethod.DELETE)
+    public String deleteCategory(@PathVariable("catId") Integer catId) {
+        categoryService.delete(categoryService.findOne(catId));
+        return "redirect:/admin/category";
     }
 }

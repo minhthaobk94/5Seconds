@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>Admin | 5Seconds</title>
+    <title>Category | 5Seconds</title>
     <!-- Bootstrap core CSS-->
     <link href="../../css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom fonts for this template-->
@@ -30,6 +30,16 @@
                 <a th:href="@{/admin/category}">Category</a>
             </li>
         </ol>
+        <!--Add Form-->
+        <form id="f_addCategory" action="/admin/category/add/" method="post">
+            <div class="input-group input-group">
+                <input type="text" class="form-control" placeholder="Enter new category"
+                       aria-describedby="sizing-addon1" name="title"/>
+                <span class="input-group-addon" id="btnAddCategory"
+                      onclick="document.getElementById('f_addCategory').submit();"><i class="fa fa-plus"
+                                                                                      aria-hidden="true"></i></span>
+            </div>
+        </form>
         <!--List categories-->
         <div class="list-group" th:each="category : ${categories}">
             <div class="list-group-item list-group-item-action">

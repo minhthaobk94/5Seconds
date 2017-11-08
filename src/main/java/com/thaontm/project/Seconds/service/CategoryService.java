@@ -12,4 +12,6 @@ public interface CategoryService {
     Category findOne(int catId);
 
     void save(Category category);
+
+    void delete(Category category);
 }
