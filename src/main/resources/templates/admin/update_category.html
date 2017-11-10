@@ -11,7 +11,8 @@
     <!-- Bootstrap core CSS-->
     <link href="/resources/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
     <!-- Custom fonts for this template-->
-    <link href="../../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
+    <link href="../../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"
+          type="text/css"/>
     <!-- Custom styles for this template-->
     <link href="../../css/sb-admin.min.css" th:href="@{/css/sb-admin.min.css}" rel="stylesheet"/>
 </head>
@@ -31,16 +32,15 @@
             </li>
         </ol>
         <!--update form-->
-        <form id="f_updateCategory" action="/admin/category/update/{catId}" th:value="${category}" method="post"
-              style="margin-top:20%">
-            <div class="input-group input-group">
+        <form id="f_updateCategory" action="/admin/category/update/{catId}" th:value="${category}" method="post">
+            <div id="input" class="input-group input-group">
                 <input type="hidden" name="catId" th:value="${category.getId()}"/>
                 <input type="text" class="form-control"
                        aria-describedby="sizing-addon1" name="title" th:value="${category.getTitle()}"/>
                 <span class="input-group-addon btn btn-outline-warning" id="btnAddCategory"
-                      onclick="document.getElementById('f_updateCategory').submit();"><i class="fa fa-pencil"
+                      onclick="document.getElementById('f_updateCategory').submit();"><i class="fa fa-download"
                                                                                          aria-hidden="true"></i></span>
-                <a class="input-group-addon btn btn-outline-danger" th:href="@{'/categories/remove/' + ${category.getId()}}">
+                <a class="input-group-addon btn btn-outline-danger" type="submit" th:href="@{'/admin/category/delete/' + ${category.getId()}}">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                 </a>
             </div>

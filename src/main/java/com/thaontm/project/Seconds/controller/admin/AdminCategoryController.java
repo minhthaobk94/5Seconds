@@ -45,7 +45,7 @@ public class AdminCategoryController {
         return "redirect:/admin/category";
     }
 
-    @RequestMapping(value = "/category/update/{catId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/category/delete/{catId}", method = RequestMethod.GET)
     public String deleteCategory(@PathVariable("catId") Integer catId) {
         categoryService.delete(categoryService.findOne(catId));
         return "redirect:/admin/category";

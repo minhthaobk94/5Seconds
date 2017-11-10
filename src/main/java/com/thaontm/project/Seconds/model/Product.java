@@ -1,8 +1,7 @@
 package com.thaontm.project.Seconds.model;
 
-import com.thaontm.project.Seconds.utils.Constants;
-
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "product")
@@ -27,16 +26,19 @@ public class Product {
     @Column(name = "price")
     private double price;
 
+    @OneToMany(mappedBy = "product")
+    private List<OrderItem> orderItems;
 
     public Product() {
     }
 
-    public Product(Category category, String productName, String description, String imgUrl, double price) {
+    public Product(Category category, String productName, String description, String imgUrl, double price, List<OrderItem> orderItems) {
         this.category = category;
         this.productName = productName;
         this.description = description;
         this.imgUrl = imgUrl;
         this.price = price;
+        this.orderItems = orderItems;
     }
 
     public int getId() {
@@ -72,10 +74,7 @@ public class Product {
     }
 
     public String getImgUrl() {
-        if (imgUrl != null && !imgUrl.isEmpty()) {
-            return imgUrl;
-        }
-        return Constants.IMG_URL_DEFAULT;
+        return imgUrl;
     }
 
     public void setImgUrl(String imgUrl) {
@@ -88,5 +87,13 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 }
