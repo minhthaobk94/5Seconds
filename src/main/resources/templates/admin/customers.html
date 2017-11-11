@@ -24,15 +24,16 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a th:href="@{/admin/dashboard}">Dashboard</a>
+                <a th:href="@{/admin/dashboard/}">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
-                <a th:href="@{/admin/customer}">Customer</a>
+                <a th:href="@{/admin/customer/}">Customer</a>
             </li>
         </ol>
-            <a th:href="@{'/admin/customer/add'}" class="btn btn-success btn-lg float-right ml-auto" role="button" aria-pressed="true"><i
-                    class="fa fa-plus"
-                    aria-hidden="true"></i></a>
+        <a th:href="@{'/admin/customer/add'}" class="btn btn-success btn-lg float-right ml-auto" role="button"
+           aria-pressed="true"><i
+                class="fa fa-plus"
+                aria-hidden="true"></i></a>
 
         <!-- Customer DataTables Card-->
         <div class="row card mb-3">
@@ -79,13 +80,19 @@
     <div th:replace="fragments/admin_footer :: footer"></div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../../js/jquery.min.js"></script>
-    <script src="../../js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script src="../../js/bootstrap.bundle.min.js" th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <!-- Core plugin JavaScript-->
-    <script src="../../js/jquery.easing.min.js"></script>
+    <script src="../../js/jquery.easing.min.js" th:src="@{/js/jquery.easing.min.js}"></script>
     <!-- Custom scripts for all pages-->
-    <script src="../../js/sb-admin.min.js"></script>
+    <script src="../../js/sb-admin.min.js" th:src="@{/js/sb-admin.min.js}"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="../../js/jquery.dataTables.js" th:src="@{/js/jquery.dataTables.js}"></script>
+    <script src="../../js/dataTables.bootstrap4.js" th:src="@{/js/dataTables.bootstrap4.js}"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="../../js/sb-admin.min.js" th:src="@{/js/sb-admin.min.js}"></script>
+    <!-- Custom scripts for this page-->
+    <script src="../../js/sb-admin-datatables.min.js" th:src="@{/js/sb-admin-datatables.min.js}"></script>
 </div>
 </body>
-
 </html>

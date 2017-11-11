@@ -1,5 +1,7 @@
 package com.thaontm.project.Seconds.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +23,7 @@ public class Customer {
     private String email;
 
     @Column(name = "birthday")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     @OneToMany(mappedBy = "customer")
@@ -35,6 +38,13 @@ public class Customer {
         this.email = email;
         this.birthday = birthday;
         this.orders = orders;
+    }
+
+    public Customer(String customer_name, String phone, String email, Date birthday) {
+        this.customer_name = customer_name;
+        this.phone = phone;
+        this.email = email;
+        this.birthday = birthday;
     }
 
     public int getId() {
