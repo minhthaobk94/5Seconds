@@ -28,7 +28,7 @@ public class AdminCustomerController {
         return "/admin/add_customer";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/customer/add", method = RequestMethod.POST)
     public String addCustomer(@RequestParam String name, @RequestParam String email, @RequestParam String phone, @RequestParam Date birthday) {
         Customer customer = new Customer(name, email, phone, birthday);
         customerService.save(customer);
