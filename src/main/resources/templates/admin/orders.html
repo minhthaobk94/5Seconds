@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>Category | 5Seconds</title>
+    <title>Order | 5Seconds</title>
     <!-- Bootstrap core CSS-->
-    <link href="../../css/bootstrap.min.css" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
     <!-- Custom fonts for this template-->
-    <link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
     <!-- Custom styles for this template-->
-    <link href="../../css/sb-admin.min.css" rel="stylesheet"/>
+    <link th:href="@{/css/sb-admin.min.css}" rel="stylesheet"/>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -62,10 +62,10 @@
                         </tfoot>
                         <tbody>
                         <tr th:each="order : ${orders}">
-                            <td th:text="${order.getId()}"></td>
+                            <td><a th:text="${order.getId()}" th:href="@{'/admin/order/detail/' + ${order.getId()}}"></a></td>
                             <td th:text="${order.getStatus()}"></td>
                             <td th:text="${order.getCustomer().getCustomer_name()}"></td>
-                            <td th:text="${order.getShipping_address}"></td>
+                            <td th:text="${order.getShipping_address()}"></td>
                             <td th:text="${order.getTotal()}"></td>
                             <td th:text="${order.getNote()}"></td>
                             <td th:text="${order.getCreated()}"></td>

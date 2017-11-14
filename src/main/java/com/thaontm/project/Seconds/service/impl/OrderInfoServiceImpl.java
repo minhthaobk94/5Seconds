@@ -17,4 +17,9 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     public List<OrderInfo> findAll() {
         return (List<OrderInfo>) orderRepository.findAll();
     }
+
+    @Override
+    public OrderInfo findOne(Integer id) {
+        return orderRepository.findOne(id);
+    }
 }
