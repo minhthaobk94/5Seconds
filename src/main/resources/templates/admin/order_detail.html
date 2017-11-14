@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Order Detail | 5Seconds</title>
+    <!-- Bootstrap core CSS-->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <!-- Custom fonts for this template-->
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
+    <!-- Custom styles for this template-->
+    <link th:href="@{/css/sb-admin.min.css}" rel="stylesheet"/>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+<!-- Navigation-->
+<div th:replace="fragments/admin_template :: nav"></div>
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a th:href="@{/admin/dashboard/}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a th:href="@{/admin/order/}">Order</a>
+            </li>
+        </ol>
+        <!-- Order Items DataTables Card-->
+        <div class="row card mb-3">
+            <div class="card-header" th:text="'Order #' + ${order.getId()}">
+                <i class="fa fa-table"></i>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        <tr th:each="orderItem : ${orderItems}">
+                            <td th:text="${orderItem.getProduct().getProductName()}"></td>
+                            <td th:text="${orderItem.getProduct().getPrice()}"></td>
+                            <td th:text="${orderItem.getQuantity()}"></td>
+                            <td th:text="${(orderItem.getProduct().getPrice())*(orderItem.getQuantity())}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Order Summary-->
+        <div class="card" style="width: 20rem; padding: 1%">
+            <div class="card-block">
+                <h4 class="card-title" th:text="'Order #' + ${order.getId() + ' summary'}"></h4>
+                <h6 th:text="${order.getStatus()}"></h6>
+                <h6 th:text="${order.getShipping_address()}"></h6>
+                <h6 th:text="${order.getCustomer().getPhone()}"></h6>
+                <h6 th:text="${order.getCustomer().getEmail()}"></h6>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <label>Total: </label>
+                    <h5 th:text="${order.getTotal()}"></h5>
+                </li>
+            </ul>
+        </div>
+        <!--&lt;!&ndash;Total&ndash;&gt;-->
+        <!--<td><h3>Grand Total</h3></td>-->
+        <!--<td class="text-right"><h3><strong-->
+                <!--th:text="${#numbers.formatDecimal(${order.getTotal()}, 0, 0)}"></strong></h3></td>-->
+
+        <!--&lt;!&ndash;Note & Add note&ndash;&gt;-->
+        <!--<td><h3>Note</h3></td>-->
+        <!--<td class="text-right"><h3><strong-->
+                <!--th:text="${#numbers.formatDecimal(${order.getNote}, 0, 0)}"></strong></h3></td>-->
+
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    <div th:replace="fragments/admin_footer :: footer"></div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="../../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script src="../../js/bootstrap.bundle.min.js" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="../../js/jquery.easing.min.js" th:src="@{/js/jquery.easing.min.js}"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="../../js/sb-admin.min.js" th:src="@{/js/sb-admin.min.js}"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="../../js/jquery.dataTables.js" th:src="@{/js/jquery.dataTables.js}"></script>
+    <script src="../../js/dataTables.bootstrap4.js" th:src="@{/js/dataTables.bootstrap4.js}"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="../../js/sb-admin.min.js" th:src="@{/js/sb-admin.min.js}"></script>
+    <!-- Custom scripts for this page-->
+    <script src="../../js/sb-admin-datatables.min.js" th:src="@{/js/sb-admin-datatables.min.js}"></script>
+</div>
+</body>
+</html>
