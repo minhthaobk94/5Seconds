@@ -30,69 +30,82 @@
                 <a th:href="@{/admin/order/}">Order</a>
             </li>
         </ol>
-        <!-- Order Items DataTables Card-->
-        <div class="row card mb-3">
-            <div class="card-header" th:text="'Order #' + ${order.getId()}">
-                <i class="fa fa-table"></i>
+        <div class="row">
+            <div class="col-8">
+                <!-- Order Items DataTables Card-->
+                <div class="row card mb-3">
+                    <div class="card-header" th:text="'SHIPMENT #' + ${order.getId()}">
+                        <i class="fa fa-table"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                <tr th:each="orderItem : ${orderItems}">
+                                    <td th:text="${orderItem.getProduct().getProductName()}"></td>
+                                    <td th:text="${orderItem.getProduct().getPrice()}"></td>
+                                    <td th:text="${orderItem.getQuantity()}"></td>
+                                    <td th:text="${(orderItem.getProduct().getPrice())*(orderItem.getQuantity())}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                        </tr>
-                        </thead>
-                        <tfoot>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                        </tr>
-                        </tfoot>
-                        <tbody>
-                        <tr th:each="orderItem : ${orderItems}">
-                            <td th:text="${orderItem.getProduct().getProductName()}"></td>
-                            <td th:text="${orderItem.getProduct().getPrice()}"></td>
-                            <td th:text="${orderItem.getQuantity()}"></td>
-                            <td th:text="${(orderItem.getProduct().getPrice())*(orderItem.getQuantity())}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
+            <div class="col-xl-4">
+                <!--Order Summary-->
+                <div class="card" style="width: 20rem; padding: 2%">
+                    <div class="card-block">
+                        <h4 class="card-title">ORDER SUMMARY</h4>
+                        <h6 th:text="${order.getStatus()}"></h6>
+                        <h6 th:text="${order.getShipping_address()}"></h6>
+                        <h6 th:text="${order.getCustomer().getPhone()}"></h6>
+                        <h6 th:text="${order.getCustomer().getEmail()}"></h6>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <label>Order total </label>
+                            <h3 class="float-right" th:text="${order.getTotal()}"></h3>
+                        </li>
+                    </ul>
+                </div>
+
+                <!--Order Notes-->
+                <div class="card" style="width: 20rem; padding: 2%; margin-top: 5%">
+                    <div class="card-block">
+                        <h4 class="card-title">ORDER NOTES</h4>
+                        <h6 th:text="${order.getNote()}"></h6>
+                    </div>
                 </div>
             </div>
         </div>
 
-
-        <!--Order Summary-->
-        <div class="card" style="width: 20rem; padding: 1%">
-            <div class="card-block">
-                <h4 class="card-title" th:text="'Order #' + ${order.getId() + ' summary'}"></h4>
-                <h6 th:text="${order.getStatus()}"></h6>
-                <h6 th:text="${order.getShipping_address()}"></h6>
-                <h6 th:text="${order.getCustomer().getPhone()}"></h6>
-                <h6 th:text="${order.getCustomer().getEmail()}"></h6>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    <label>Total: </label>
-                    <h5 th:text="${order.getTotal()}"></h5>
-                </li>
-            </ul>
-        </div>
         <!--&lt;!&ndash;Total&ndash;&gt;-->
         <!--<td><h3>Grand Total</h3></td>-->
         <!--<td class="text-right"><h3><strong-->
-                <!--th:text="${#numbers.formatDecimal(${order.getTotal()}, 0, 0)}"></strong></h3></td>-->
+        <!--th:text="${#numbers.formatDecimal(${order.getTotal()}, 0, 0)}"></strong></h3></td>-->
 
         <!--&lt;!&ndash;Note & Add note&ndash;&gt;-->
         <!--<td><h3>Note</h3></td>-->
         <!--<td class="text-right"><h3><strong-->
-                <!--th:text="${#numbers.formatDecimal(${order.getNote}, 0, 0)}"></strong></h3></td>-->
+        <!--th:text="${#numbers.formatDecimal(${order.getNote}, 0, 0)}"></strong></h3></td>-->
 
     </div>
     <!-- /.container-fluid-->
