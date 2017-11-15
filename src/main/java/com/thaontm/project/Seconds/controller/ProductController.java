@@ -27,6 +27,8 @@ public class ProductController {
         model.put("product", productService.findOne(productId));
         model.put("relative_products", productService.findDistinctByIdNotIn(productId));
         model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());
+        model.put("cart", CartUtils.getInstance(session).getCartItems());
+        model.put("cartTotalPrice", CartUtils.getInstance(session).getTotalPrice());
         return "product_detail";
     }
 }

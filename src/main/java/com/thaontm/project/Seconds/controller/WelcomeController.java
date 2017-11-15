@@ -22,6 +22,8 @@ public class WelcomeController {
         model.put("categories", categoryService.findAll());
         model.put("products", categoryService.findTopByOrderByIdDesc().getProducts());
         model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());
+        model.put("cart", CartUtils.getInstance(session).getCartItems());
+        model.put("cartTotalPrice", CartUtils.getInstance(session).getTotalPrice());
         return "welcome";
     }
 
@@ -31,6 +33,8 @@ public class WelcomeController {
         model.put("categories", categoryService.findAll());
         model.put("products", categoryService.findOne(catId).getProducts());
         model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());
+        model.put("cart", CartUtils.getInstance(session).getCartItems());
+        model.put("cartTotalPrice", CartUtils.getInstance(session).getTotalPrice());
         return "welcome";
     }
 }

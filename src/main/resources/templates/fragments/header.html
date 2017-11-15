@@ -17,36 +17,65 @@
                 </form>
             </div>
             <div class="col-xl-4">
-                <a id="navbarResponsive" class="nav-link float-right btn btn-info" aria-haspopup="true"
-                   aria-expanded="false" style="position: relative" th:href="@{'/cart'}">
+                <!--<a id="navbarResponsive" class="nav-link float-right btn btn-info dropdown-toggle" aria-haspopup="true"-->
+                <!--aria-expanded="false" style="position: relative" th:href="@{'/cart'}">-->
+                <!--<i class="fa fa-shopping-cart fa-lg" data-toggle="dropdown" aria-hidden="true"></i>-->
+                <!--<span class="badge badge-pill badge-warning pull-left" style="position: absolute"-->
+                <!--th:text="${itemsQuantity}"></span>-->
+                <!--</a>-->
+                <button id="navbarResponsive" class="nav-link btn btn-info mr-lg-2 float-right text-center"
+                        th:href="@{'/cart'}" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-shopping-cart fa-lg" data-toggle="dropdown" aria-hidden="true"></i>
-                    <h6><span class="badge badge-pill badge-warning pull-right" style="position: absolute"
-                              th:text="${itemsQuantity}"></span>
-                    </h6>
-                </a>
-                <!--<form class="dropdown-menu p-4"> -->
-                <!--<div class="form-group">-->
-                <!--<label for="exampleDropdownFormEmail2">Email address</label>-->
-                <!--<input type="email" class="form-control" id="exampleDropdownFormEmail2"-->
-                <!--placeholder="email@example.com"/>-->
-                <!--</div>-->
-                <!--<div class="form-group">-->
-                <!--<label for="exampleDropdownFormPassword2">Password</label>-->
-                <!--<input type="password" class="form-control" id="exampleDropdownFormPassword2"-->
-                <!--placeholder="Password"/>-->
-                <!--</div>-->
-                <!--<div class="form-check">-->
-                <!--<label class="form-check-label">-->
-                <!--<input type="checkbox" class="form-check-input"/>-->
-                <!--Remember me-->
-                <!--</label>-->
-                <!--</div>-->
-                <!--<button type="submit" class="btn btn-primary">Sign in</button>-->
-                <!--</form>-->
+                    <span class="badge badge-pill badge-warning float-right" th:text="${itemsQuantity}"></span>
+                </button>
+                <div class="container-fluid dropdown-menu p-2 dropdown-menu-right">
+                    <div class="list-group" th:each="cartItem : ${cart}">
+                        <a class="list-group-item list-group-item-action  flex-column align-items-start"
+                           th:href="@{'/products/' + ${cartItem.getProduct().getId()}}">
+
+                            <img class="thumbnail pull-left media-object"
+                                 th:src="${cartItem.getProduct().getImgUrl()}"
+                                 style="width: 72px; height: 72px;"/>
+                            <h5 class="media-heading d-inline"
+                                th:text="${cartItem.getProduct().getProductName()} + ' X ' + ${cartItem.getQuantity()}">
+                            </h5>
+                            <h6><strong
+                                    th:text="${#numbers.formatDecimal(cartItem.getTotalPrice(), 0, 0)}"></strong>
+                            </h6>
+                        </a>
+                    </div>
+                    <ul class="list-group list-group-flush" style="margin-top: 5%">
+                        <li class="list-group-item">
+                            <label>Total </label>
+                            <h3 class="float-right" th:text="${#numbers.formatDecimal(cartTotalPrice, 0, 0)}"></h3>
+                        </li>
+                    </ul>
+
+                </div>
             </div>
+            <!--<form class="dropdown-menu p-4">-->
+            <!--<div class="form-group">-->
+            <!--<label for="exampleDropdownFormEmail2">Email address</label>-->
+            <!--<input type="email" class="form-control" id="exampleDropdownFormEmail2"-->
+            <!--placeholder="email@example.com"/>-->
+            <!--</div>-->
+            <!--<div class="form-group">-->
+            <!--<label for="exampleDropdownFormPassword2">Password</label>-->
+            <!--<input type="password" class="form-control" id="exampleDropdownFormPassword2"-->
+            <!--placeholder="Password"/>-->
+            <!--</div>-->
+            <!--<div class="form-check">-->
+            <!--<label class="form-check-label">-->
+            <!--<input type="checkbox" class="form-check-input"/>-->
+            <!--Remember me-->
+            <!--</label>-->
+            <!--</div>-->
+            <!--<button type="submit" class="btn btn-primary">Sign in</button>-->
+            <!--</form>-->
         </div>
     </nav>
-    <div class="container">
+    <div class="container" style="margin: 2%">
         <nav class="nav nav-pills navbar-expand-lg navbar-light bg-faded justify-content-center">
             <a class="nav-link" th:each="category : ${categories}"
                th:classappend="${category.getId() == catId ||  category.getId() == categoryId ? 'active' : ''}"

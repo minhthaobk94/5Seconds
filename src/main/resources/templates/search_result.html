@@ -40,19 +40,15 @@
                 <a th:href="@{'/products/' + ${product.getId()}}">
                     <img class="card-img-top" th:src="${product.getImgUrl()}" alt=""/>
                 </a>
-                <span id="btnAddToCart" class="float-right"><a class="btn btn-success" th:href="@{'/addToCart/' + ${product.getId()}}">Add to cart</a></span>
                 <div class="card-body">
                     <span class="badge badge-danger float-right" th:text="${product.getCategory().getTitle()}"></span>
-                    <h4 class="card-title">
+                    <h5 class="card-title">
                         <a th:href="@{'/products/' + ${product.getId()}}"
                            th:text="${product.getProductName()}"></a>
-                    </h4>
-
-                    <h5 th:text="${product.getPrice()}"></h5>
+                    </h5>
+                    <h6 th:text="${product.getPrice()}"></h6>
                     <p class="card-text" th:text="${product.getDescription()}"></p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                    <a id="btnAddToCart" class="btn btn-outline-success float-right" th:href="@{'/addToCart/' + ${product.getId()}}"><i class="fa fa-fw fa-shopping-cart"></i>Add to cart</a>
                 </div>
             </div>
         </div>
@@ -61,7 +57,7 @@
     <!-- /.row -->
 
     <!--Pagination-->
-    <ul class="pagination justify-content-center">
+    <ul class="pagination justify-content-center" style="margin: 1%">
         <li class="page-item">
             <a class="page-link" th:href="@{'/search/'(page=${pageIndex > 1 ? pageIndex - 1 : pageIndex}, size=${pageSize}, q=${query})}" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>

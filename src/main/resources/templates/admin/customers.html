@@ -30,13 +30,9 @@
                 <a th:href="@{/admin/customer/}">Customer</a>
             </li>
         </ol>
-        <a th:href="@{'/admin/customer/add'}" class="btn btn-success btn-lg float-right ml-auto" role="button"
-           aria-pressed="true"><i
-                class="fa fa-plus"
-                aria-hidden="true"></i></a>
 
         <!-- Customer DataTables Card-->
-        <div class="row card mb-3">
+        <div class="row card mb-3" style="margin: 1%">
             <div class="card-header">
                 <i class="fa fa-table"></i> Our customers
             </div>
@@ -73,6 +69,11 @@
                 </div>
             </div>
         </div>
+
+        <a th:href="@{'/admin/customer/add'}" class="btn btn-success btn-lg float-right ml-auto" role="button"
+           aria-pressed="true"><i
+                class="fa fa-plus"
+                aria-hidden="true"></i></a>
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->

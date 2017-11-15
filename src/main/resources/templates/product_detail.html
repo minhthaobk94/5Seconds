@@ -67,9 +67,7 @@
                     </h4>
                     <h5 th:text="${relative_product.getPrice()}"></h5>
                     <p class="card-text" th:text="${relative_product.getDescription()}"></p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                    <a id="btnAddToCart" class="btn btn-outline-success float-right" th:href="@{'/addToCart/' + ${product.getId()}}"><i class="fa fa-fw fa-shopping-cart"></i>Add to cart</a>
                 </div>
             </div>
         </div>

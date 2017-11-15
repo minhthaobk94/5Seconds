@@ -32,6 +32,8 @@ public class SearchController {
         model.put("pageSize", Constants.PAGE_SIZE);
         model.put("query", q);
         model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());
+        model.put("cart", CartUtils.getInstance(session).getCartItems());
+        model.put("cartTotalPrice", CartUtils.getInstance(session).getTotalPrice());
         return "search_result";
     }
 }

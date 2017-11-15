@@ -30,14 +30,12 @@
                 <a th:href="@{/admin/category/}">Category</a>
             </li>
         </ol>
-        <!--Add Form-->
-        <form id="f_addCategory" action="/admin/category/add/" method="post">
+
+        <form id="f_addCategory" action="/admin/category/add/" method="post" style="margin-bottom: 3%">
             <div class="input-group input-group">
-                <input type="text" class="form-control" placeholder="Enter new category"
+                <input type="text" class="form-control" placeholder="ENTER NEW CATEGORY"
                        aria-describedby="sizing-addon1" name="title"/>
-                <span class="input-group-addon" id="btnAddCategory"
-                      onclick="document.getElementById('f_addCategory').submit();"><i class="fa fa-plus"
-                                                                                      aria-hidden="true"></i></span>
+                <span type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></span>
             </div>
         </form>
         <!--List categories-->

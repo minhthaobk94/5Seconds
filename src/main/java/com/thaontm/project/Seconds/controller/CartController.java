@@ -35,7 +35,7 @@ public class CartController {
     public String checkout(Map<String, Object> model, HttpSession session) {
         CartUtils.getInstance(session).checkout();
         model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());
-        return "redirect:/";
+        return "checkout";
     }
 
     @RequestMapping(value = "/cart/remove/{productId}", method = RequestMethod.GET)
