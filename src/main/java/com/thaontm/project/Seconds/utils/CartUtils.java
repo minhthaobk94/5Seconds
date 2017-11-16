@@ -11,7 +11,7 @@ public class CartUtils {
     private static CartUtils instance;
     private HttpSession session;
     private List<CartItemDTO> cartItems;
-    private static String SESSION_ATTRIBUTE_CART = "cart";
+    public static String SESSION_ATTRIBUTE_CART = "cart";
 
     private CartUtils(HttpSession session) {
         this.session = session;
@@ -39,9 +39,9 @@ public class CartUtils {
         return this.cartItems;
     }
 
-    private CartItemDTO getCartItem(int productId) {
+    private CartItemDTO getCartItem(Product product) {
         for (CartItemDTO cartItemDTO : cartItems) {
-            if (cartItemDTO.getProduct().getId() == productId) {
+            if (cartItemDTO.getProduct().getId() == product.getId()) {
                 return cartItemDTO;
             }
         }
@@ -49,7 +49,7 @@ public class CartUtils {
     }
 
     public void addToCart(Product product) {
-        CartItemDTO cartItemDTO = getCartItem(product.getId());
+        CartItemDTO cartItemDTO = getCartItem(product);
         if (cartItemDTO == null) {
             cartItems.add(new CartItemDTO(product, Constants.QUANTITY_DEFAULT));
         } else {
@@ -72,7 +72,7 @@ public class CartUtils {
     }
 
     public void removeCartItem(Product product) {
-        CartItemDTO cartItemDTO = getCartItem(product.getId());
+        CartItemDTO cartItemDTO = getCartItem(product);
         cartItems.remove(cartItemDTO);
     }
 

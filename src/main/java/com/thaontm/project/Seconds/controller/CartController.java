@@ -17,7 +17,6 @@ public class CartController {
     @Autowired
     private ProductService productService;
 
-
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
     public String showCart(Map<String, Object> model, HttpSession session) {
         model.put("cart", CartUtils.getInstance(session).getCartItems());
@@ -38,6 +37,8 @@ public class CartController {
     public String checkout(Map<String, Object> model, HttpSession session) {
         CartUtils.getInstance(session).checkout();
         model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());
+        model.put("cart", session.getAttribute(CartUtils.SESSION_ATTRIBUTE_CART));
+        model.put("cartTotalPrice", CartUtils.getInstance(session).getTotalPrice());
         return "checkout";
     }
 
