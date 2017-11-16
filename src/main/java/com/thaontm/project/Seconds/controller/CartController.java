@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import java.util.Map;
 public class CartController {
     @Autowired
     private ProductService productService;
+
 
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
     public String showCart(Map<String, Object> model, HttpSession session) {
@@ -25,10 +27,11 @@ public class CartController {
     }
 
     @RequestMapping(value = "/addToCart/{productId}", method = RequestMethod.GET)
-    public String addToCart(Map<String, Object> model, HttpSession session, @PathVariable("productId") Integer productId) {
+    public String addToCart(Map<String, Object> model, HttpSession session, @PathVariable("productId") Integer productId, HttpServletRequest request) {
         CartUtils.getInstance(session).addToCart(productService.findOne(productId));
         model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());
-        return "redirect:/";
+        String referrer = request.getHeader("referer");
+        return "redirect:" + referrer;
     }
 
     @RequestMapping(value = "/checkout", method = RequestMethod.GET)
