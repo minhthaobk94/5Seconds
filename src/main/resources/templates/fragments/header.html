@@ -45,12 +45,20 @@
                             <h3 class="float-right" th:text="${#numbers.formatDecimal(cartTotalPrice, 0, 0)}"></h3>
                         </li>
                     </ul>
-
+                    <div class="btn-group float-right" role="group" aria-label="Basic example" style="margin: 3%">
+                        <a class="btn btn-warning" th:href="@{'/cart'}">
+                            <i class="fa fa-shopping-cart"></i>
+                            Go to cart
+                        </a>
+                        <a class="btn btn-success" th:href="@{'/checkout'}" type="submit">
+                            Checkout <i class="fa fa-hand-pointer-o"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
-    <div class="container" style="margin: 2%">
+    <div class="container" style="margin: 4%">
         <nav class="nav nav-pills navbar-expand-lg navbar-light bg-faded justify-content-center">
             <a class="nav-link" th:each="category : ${categories}"
                th:classappend="${category.getId() == catId ||  category.getId() == categoryId ? 'active' : ''}"
