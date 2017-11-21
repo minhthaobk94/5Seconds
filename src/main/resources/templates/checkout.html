@@ -25,35 +25,35 @@
         <div class="col-6">
             <!-- Customer Add Form-->
             <h5>Customer information</h5>
-            <form id="f_addCustomer" action="/customer/" method="post">
+            <form id="f_addCustomer" action="/customer/add" method="post">
                 <div class="form-group row">
                     <label for="inputCustomerName" class="col-sm-2 col-form-label">Full Name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputCustomerName" placeholder="Your name is"/>
+                        <input name="name" type="text" class="form-control" id="inputCustomerName" placeholder="Your name is"/>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputEmail" class="col-sm-2 col-form-label">E-mail</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputEmail" placeholder="E-mail"/>
+                        <input name="email" type="email" class="form-control" id="inputEmail" placeholder="E-mail"/>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputPhone" class="col-sm-2 col-form-label">Phone</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputPhone" placeholder="Phone number"/>
+                        <input name="phone" type="text" class="form-control" id="inputPhone" placeholder="Phone number"/>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputBirthday" class="col-sm-2 col-form-label">Birthday</label>
                     <div class="col-sm-10">
-                        <input type="date" class="form-control" id="inputBirthday" placeholder="Birthday"/>
+                        <input name="birthday" type="date" class="form-control" id="inputBirthday" placeholder="Birthday"/>
                     </div>
                 </div>
             </form>
             <div class="form-group row float-right">
                 <div class="col-sm-10">
-                    <a type="submit" class="btn btn-primary" th:href="@{/admin/customer/}">Submit</a>
+                    <span class="btn btn-primary"  onclick="document.getElementById('f_addCustomer').submit();">Continue</span>
                 </div>
             </div>
         </div>
@@ -95,17 +95,16 @@
                             </tr>
                             </tbody>
                         </table>
-                        <h6 th:text="${note}"></h6>
                     </div>
                 </div>
             </div>
-            <form id="f_addNote" action="/order/note" method="post" style="margin-bottom: 3%">
-                <div class="input-group input-group">
-                    <input type="text" class="form-control" placeholder="Write note for order"
-                           aria-describedby="sizing-addon1" name="order_note"/>
-                    <span type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                </div>
-            </form>
+            <!--<form id="f_addNote" action="/order/note" method="post" style="margin-bottom: 3%">-->
+                <!--<div class="input-group input-group">-->
+                    <!--<input type="text" class="form-control" placeholder="Write note for order"-->
+                           <!--aria-describedby="sizing-addon1" name="order_note"/>-->
+                    <!--<span type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></span>-->
+                <!--</div>-->
+            <!--</form>-->
         </div>
     </div>
 </div>

@@ -3,6 +3,7 @@ package com.thaontm.project.Seconds.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -80,8 +81,8 @@ public class Customer {
         this.email = email;
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public String getBirthday() {
+        return convertStringToDate(birthday);
     }
 
     public void setBirthday(Date birthday) {
@@ -94,5 +95,17 @@ public class Customer {
 
     public void setOrders(List<OrderInfo> orders) {
         this.orders = orders;
+    }
+
+    public String convertStringToDate(Date indate)
+    {
+        String dateString = null;
+        SimpleDateFormat sdfr = new SimpleDateFormat("dd/MM/yyyy");
+        try{
+            dateString = sdfr.format( indate );
+        }catch (Exception ex ){
+            System.out.println(ex);
+        }
+        return dateString;
     }
 }
