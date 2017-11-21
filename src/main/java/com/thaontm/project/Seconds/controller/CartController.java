@@ -1,5 +1,6 @@
 package com.thaontm.project.Seconds.controller;
 
+import com.thaontm.project.Seconds.service.OrderInfoService;
 import com.thaontm.project.Seconds.service.ProductService;
 import com.thaontm.project.Seconds.utils.CartUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ import java.util.Map;
 public class CartController {
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private OrderInfoService orderInfoService;
 
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
     public String showCart(Map<String, Object> model, HttpSession session) {
