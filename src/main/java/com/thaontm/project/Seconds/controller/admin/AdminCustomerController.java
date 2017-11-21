@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
@@ -28,10 +31,16 @@ public class AdminCustomerController {
         return "/admin/add_customer";
     }
 
-    @RequestMapping(value = "/customer/add", method = RequestMethod.POST)
-    public String addCustomer(@RequestParam String name, @RequestParam String email, @RequestParam String phone, @RequestParam Date birthday) {
-        Customer customer = new Customer(name, email, phone, birthday);
-        customerService.save(customer);
-        return "redirect:/admin/customers";
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String addCustomer(@RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("phone") String phone, @RequestParam("birthday") String birthdaySt) {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date birthday = format.parse(birthdaySt);
+            Customer customer = new Customer(name, email, phone, birthday);
+            customerService.save(customer);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/admin/customer/";
     }
 }

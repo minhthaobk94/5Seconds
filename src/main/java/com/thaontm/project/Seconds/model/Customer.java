@@ -23,6 +23,7 @@ public class Customer {
     private String email;
 
     @Column(name = "birthday")
+    @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
