@@ -29,6 +29,7 @@
                     <h4 class="card-title">Shipping Infomation</h4>
                 </div>
                 <div class="card-block">
+                    <h5 type="hidden" th:text="${customer.getId()}"></h5>
                     <h5 th:text="${customer.getCustomer_name()}"></h5>
                     <h5 th:text="${customer.getEmail()}"></h5>
                     <h5 th:text="${customer.getPhone()}"></h5>
@@ -36,6 +37,13 @@
                     <a th:href="@{/checkout/}">Other shipping address</a>
                 </div>
             </div>
+            <!--Note-->
+            <form id="f_addNote" action="/checkout/bill" method="post" style="margin-bottom: 3%">
+                <div class="input-group input-group">
+                    <input type="text" class="form-control" placeholder="Write note for order"
+                           aria-describedby="sizing-addon1" name="order_note"/>
+                </div>
+            </form>
         </div>
         <div class="col-6">
             <!-- Order Items DataTables Card-->
@@ -78,13 +86,12 @@
                     </div>
                 </div>
             </div>
-            <form id="f_addNote" action="/order/note" method="post" style="margin-bottom: 3%">
-            <div class="input-group input-group">
-                <input type="text" class="form-control" placeholder="Write note for order"
-                       aria-describedby="sizing-addon1" name="order_note"/>
-                <span type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></span>
+        </div>
+
+        <div class="form-group row float-right">
+            <div class="col-sm-10">
+                <span class="btn btn-primary" onclick="document.getElementById('f_addNote').submit();">Continue</span>
             </div>
-        </form>
         </div>
     </div>
 </div>

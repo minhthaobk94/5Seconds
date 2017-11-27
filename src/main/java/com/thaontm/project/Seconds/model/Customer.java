@@ -82,7 +82,7 @@ public class Customer {
     }
 
     public String getBirthday() {
-        return (new StringUtils().convertStringToDate(birthday));
+        return (new StringUtils().convertDateToString(birthday));
     }
 
     public void setBirthday(Date birthday) {

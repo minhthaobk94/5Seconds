@@ -71,7 +71,7 @@
                                th:text="${product.getProductName()}"></a>
                         </h4>
                         <h5 th:text="${product.getPrice()}"></h5>
-                        <p class="card-text" th:text="${product.getDescription()}"></p>
+                        <p class="card-text"  th:text="${product.getDescription()}"></p>
                         <a id="btnAddToCart" class="btn btn-outline-success float-right" th:href="@{'/addToCart/' + ${product.getId()}}"><i class="fa fa-fw fa-shopping-cart"></i>Add to cart</a>
                     </div>
                 </div>

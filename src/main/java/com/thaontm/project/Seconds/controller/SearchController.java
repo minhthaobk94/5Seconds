@@ -1,10 +1,13 @@
 package com.thaontm.project.Seconds.controller;
 
+import com.thaontm.project.Seconds.model.Product;
 import com.thaontm.project.Seconds.service.ProductService;
 import com.thaontm.project.Seconds.utils.CartUtils;
 import com.thaontm.project.Seconds.utils.Constants;
 import com.thaontm.project.Seconds.utils.PaginationUtils;
+import com.thaontm.project.Seconds.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -20,14 +23,24 @@ public class SearchController {
     @Autowired
     private ProductService productService;
 
+    StringUtils utils = new StringUtils();
+
     @RequestMapping(value = "/search/", method = RequestMethod.GET)
     public String search(Map<String, Object> model, @RequestParam(name = "q", defaultValue = "") String q, @PageableDefault(page = 0, size = 12)Pageable pageable, HttpSession session) {
         if (!q.isEmpty()) {
+            Page<Product> products =   productService.findByProductNameContaining(q, pageable);
+            for (Product product : products) {
+                utils.cutProductDescription(product);
+            }
             model.put("totalPages", PaginationUtils.calculateTotalPages(productService.findByProductNameContaining(q).size(), Constants.PAGE_SIZE));
-            model.put("products", productService.findByProductNameContaining(q, pageable));
+            model.put("products", products);
         } else {
+            Page<Product> products =   productService.findAll(pageable);
+            for (Product product : products) {
+                utils.cutProductDescription(product);
+            }
             model.put("totalPages", PaginationUtils.calculateTotalPages(productService.findAll().size(), Constants.PAGE_SIZE));
-           model.put("products", productService.findAll(pageable));
+           model.put("products", products);
         }
         model.put("pageSize", Constants.PAGE_SIZE);
         model.put("query", q);
