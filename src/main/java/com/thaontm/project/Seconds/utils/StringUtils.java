@@ -3,6 +3,8 @@ package com.thaontm.project.Seconds.utils;
 import com.thaontm.project.Seconds.model.Product;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class StringUtils {
@@ -25,5 +27,11 @@ public class StringUtils {
             product.setDescription(des.substring(0, Constants.DESCRIPTION_LENGTH) + " ...");
         }
         return des;
+    }
+
+    public String getCurrentDateTime(Date indate){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
     }
 }
