@@ -38,4 +38,9 @@ public class CategoryServiceImpl implements CategoryService {
     public void delete(Category category) {
         categoryRepository.delete(category);
     }
+
+    @Override
+    public Category findByTitle(String catTitle) {
+        return categoryRepository.findCategoryByTitleIsLike(catTitle);
+    }
 }

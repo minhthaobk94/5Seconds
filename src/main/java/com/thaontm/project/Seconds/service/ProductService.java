@@ -18,4 +18,8 @@ public interface ProductService {
     List<Product> findByProductNameContaining(String q);
 
     Page<Product> findByProductNameContaining(String q, Pageable pageable);
+
+    void save(Product product);
+
+    void delete(Product product);
 }

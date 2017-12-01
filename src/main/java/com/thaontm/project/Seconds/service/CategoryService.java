@@ -14,4 +14,6 @@ public interface CategoryService {
     void save(Category category);
 
     void delete(Category category);
+
+    Category findByTitle(String catTitle);
 }

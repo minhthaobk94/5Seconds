@@ -45,4 +45,14 @@ public class ProductServiceImpl implements ProductService {
     public Page<Product> findByProductNameContaining(String q, Pageable pageable) {
         return (Page<Product>)productRepository.findByProductNameContaining(q, pageable);
     }
+
+    @Override
+    public void save(Product product) {
+        productRepository.save(product);
+    }
+
+    @Override
+    public void delete(Product product) {
+        productRepository.delete(product);
+    }
 }

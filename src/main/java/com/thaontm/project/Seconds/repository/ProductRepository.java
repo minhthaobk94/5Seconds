@@ -20,4 +20,7 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, I
 
     @Override
     Iterable<Product> findAll(Sort sort);
+
+    @Override
+    void delete(Product product);
 }
