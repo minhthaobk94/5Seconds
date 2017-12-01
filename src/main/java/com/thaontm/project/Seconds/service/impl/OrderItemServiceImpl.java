@@ -18,4 +18,9 @@ public class OrderItemServiceImpl implements OrderItemService {
     public List<OrderItem> findAllByOrderInfo(OrderInfo orderInfo) {
         return orderItemRepository.findAllByOrderInfo(orderInfo);
     }
+
+    @Override
+    public void save(OrderItem orderItem) {
+        orderItemRepository.save(orderItem);
+    }
 }

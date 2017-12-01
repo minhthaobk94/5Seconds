@@ -20,6 +20,9 @@ public class Customer {
     @Column(name = "phone")
     private String phone;
 
+    @Column(name = "address")
+    private String address;
+
     @Column(name = "email")
     private String email;
 
@@ -49,8 +52,33 @@ public class Customer {
         this.birthday = birthday;
     }
 
+    public Customer(String customer_name, String phone, String address, String email, Date birthday, List<OrderInfo> orders) {
+        this.customer_name = customer_name;
+        this.phone = phone;
+        this.address = address;
+        this.email = email;
+        this.birthday = birthday;
+        this.orders = orders;
+    }
+
+    public Customer(String customer_name, String phone, String address, String email, Date birthday) {
+        this.customer_name = customer_name;
+        this.phone = phone;
+        this.address = address;
+        this.email = email;
+        this.birthday = birthday;
+    }
+
     public int getId() {
         return id;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setId(int id) {

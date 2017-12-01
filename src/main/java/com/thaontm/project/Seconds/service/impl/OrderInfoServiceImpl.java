@@ -22,4 +22,9 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     public OrderInfo findOne(Integer id) {
         return orderRepository.findOne(id);
     }
+
+    @Override
+    public void save(OrderInfo orderInfo) {
+        orderRepository.save(orderInfo);
+    }
 }

@@ -19,6 +19,15 @@ public class OrderItem{
     @Column(name = "quantity")
     private int quantity;
 
+    public OrderItem() {
+    }
+
+    public OrderItem(Product product, OrderInfo orderInfo, int quantity) {
+        this.product = product;
+        this.orderInfo = orderInfo;
+        this.quantity = quantity;
+    }
+
     public Product getProduct() {
         return product;
     }

@@ -7,4 +7,5 @@ import java.util.List;
 public interface OrderInfoService {
     List<OrderInfo> findAll();
     OrderInfo findOne(Integer id);
+    void save(OrderInfo orderInfo);
 }

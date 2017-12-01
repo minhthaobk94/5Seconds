@@ -72,7 +72,7 @@
                     <td>  </td>
                     <td>  </td>
                     <td><h4>Total</h4></td>
-                    <td class="text-right"><h3><strong
+                    <td class="text-right" id="totalPrice"><h3><strong
                             th:text="${#numbers.formatDecimal(cartTotalPrice, 0, 0)}"></strong></h3></td>
                 </tr>
                 <tr>
@@ -86,7 +86,7 @@
                         </a>
                     </td>
                     <td>
-                        <a class="btn btn-success" th:href="@{'/checkout/'}" type="submit">
+                        <a class="btn btn-success" th:href="@{'/checkout/'}" type="submit" onclick="document.getElementById('totalPrice')">
                             Checkout <i class="fa fa-hand-pointer-o"></i>
                         </a>
                     </td>
