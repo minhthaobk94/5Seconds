@@ -20,7 +20,7 @@ public class OrderController {
         return "search_order";
     }
 
-    @RequestMapping(value = "/search/{orderId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/search/", method = RequestMethod.POST)
     public String searchOrder(Map<String, Object> model, @RequestParam("orderId") Integer orderId) {
         model.put("orderInfo", orderInfoService.findOne(orderId));
         return "order_history";
