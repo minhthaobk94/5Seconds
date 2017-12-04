@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -66,15 +67,19 @@ public class CheckoutController {
         customerService.save(customer);
         orderInfoService.save(orderInfo);
         List<CartItemDTO> items = CartUtils.getInstance(session).getCartItems();
+        List<OrderItem> orderItems = new ArrayList<>();
         for (CartItemDTO cartItemDTO : items) {
             OrderItem orderItem = new OrderItem(cartItemDTO.getProduct(), orderInfo, cartItemDTO.getQuantity());
+            orderItems.add(orderItem);
             orderItemService.save(orderItem);
         }
+        orderInfo.setOrderItems(orderItems);
         model.put("note", note);
         model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());
         model.put("cart", session.getAttribute(CartUtils.SESSION_ATTRIBUTE_CART));
         model.put("cartTotalPrice", totalPrice);
         model.put("customer", customer);
+        model.put("orderInfo", orderInfo);
         return "bill";
     }
 }
