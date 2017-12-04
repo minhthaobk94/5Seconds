@@ -21,7 +21,7 @@
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
     <div class="row" style="margin-top: 5%">
-        <h1>Your order ID is </h1>
+        <h1 th:text="'Your order ID is ' + ${orderInfo.getId()}"></h1>
         <!--Order detail-->
         <div class="col-6">
             <!--Summary Shipping Info -->
