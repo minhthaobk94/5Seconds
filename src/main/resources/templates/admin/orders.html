@@ -62,8 +62,15 @@
                         </tfoot>
                         <tbody>
                         <tr th:each="order : ${orders}">
-                            <td><a th:text="${order.getId()}" th:href="@{'/admin/order/detail/' + ${order.getId()}}"></a></td>
-                            <td th:text="${order.getStatus()}"></td>
+                            <td><a th:text="${order.getId()}"
+                                   th:href="@{'/admin/order/detail/' + ${order.getId()}}"></a></td>
+                            <td>
+                                <select class="form-control" id="inputCategory" name="category">
+                                    <option selected="selected" th:text="${order.getStatus()}"></option>
+                                    <option>Delivery</option>
+                                    <option>Done</option>
+                                </select>
+                            </td>
                             <td th:text="${order.getCustomer().getCustomer_name()}"></td>
                             <td th:text="${order.getShipping_address()}"></td>
                             <td th:text="${order.getTotal()}"></td>

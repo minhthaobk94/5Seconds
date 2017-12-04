@@ -61,11 +61,8 @@ public class CheckoutController {
 
     @RequestMapping(value = "/bill", method = RequestMethod.POST)
     public String getBill(Map<String, Object> model, @RequestParam("order_note") String note, HttpSession session) {
-//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//        LocalDateTime now = LocalDateTime.now();
-//        String created = dtf.format(now);
         double totalPrice = CartUtils.getInstance(session).getTotalPrice();
-        OrderInfo orderInfo = new OrderInfo(customer, customer.getAddress(), totalPrice, note, new Date(), "pending", null);
+        OrderInfo orderInfo = new OrderInfo(customer, customer.getAddress(), totalPrice, note, new Date(), "Pending", null);
         customerService.save(customer);
         orderInfoService.save(orderInfo);
         List<CartItemDTO> items = CartUtils.getInstance(session).getCartItems();

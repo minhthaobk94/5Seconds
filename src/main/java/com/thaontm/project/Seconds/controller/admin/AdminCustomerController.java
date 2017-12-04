@@ -32,11 +32,11 @@ public class AdminCustomerController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addCustomer(@RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("phone") String phone, @RequestParam("birthday") String birthdaySt) {
+    public String addCustomer(@RequestParam("name") String name, @RequestParam("address") String address, @RequestParam("email") String email, @RequestParam("phone") String phone, @RequestParam("birthday") String birthdaySt) {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date birthday = format.parse(birthdaySt);
-            Customer customer = new Customer(name, email, phone, birthday);
+            Customer customer = new Customer(name, phone, address, email, birthday);
             customerService.save(customer);
         } catch (ParseException e) {
             e.printStackTrace();

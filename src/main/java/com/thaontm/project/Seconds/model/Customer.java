@@ -37,21 +37,6 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String customer_name, String phone, String email, Date birthday, List<OrderInfo> orders) {
-        this.customer_name = customer_name;
-        this.phone = phone;
-        this.email = email;
-        this.birthday = birthday;
-        this.orders = orders;
-    }
-
-    public Customer(String customer_name, String phone, String email, Date birthday) {
-        this.customer_name = customer_name;
-        this.phone = phone;
-        this.email = email;
-        this.birthday = birthday;
-    }
-
     public Customer(String customer_name, String phone, String address, String email, Date birthday, List<OrderInfo> orders) {
         this.customer_name = customer_name;
         this.phone = phone;
