@@ -40,8 +40,6 @@ public class CheckoutController {
     @Autowired
     ProductService productService;
 
-    Customer customer;
-
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String checkout(Map<String, Object> model, HttpSession session) {
         model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());
@@ -54,25 +52,33 @@ public class CheckoutController {
         super();
     }
 
-    @RequestMapping(value = "/summary", method = RequestMethod.POST)
-    public String getSummary(Map<String, Object> model, HttpSession session, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("address") String address, @RequestParam("phone") String phone, @RequestParam("birthday") String birthdaySt) {
+//    @RequestMapping(value = "/summary", method = RequestMethod.POST)
+//    public String getSummary(Map<String, Object> model, HttpSession session, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("address") String address, @RequestParam("phone") String phone, @RequestParam("birthday") String birthdaySt) {
+//        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//        try {
+//            Date birthday = format.parse(birthdaySt);
+//            customer = new Customer(name, phone, address, email, birthday, null);
+//            model.put("customer", customer);
+//            model.put("cart", session.getAttribute(CartUtils.SESSION_ATTRIBUTE_CART));
+//            model.put("cartTotalPrice", CartUtils.getInstance(session).getTotalPrice());
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        return "checkout_summary";
+//    }
+
+    @RequestMapping(value = "/bill", method = RequestMethod.POST)
+    public String getBill(Map<String, Object> model, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("address") String address, @RequestParam("phone") String phone, @RequestParam("birthday") String birthdaySt, @RequestParam("order_note") String note, HttpSession session) {
+        double totalPrice = CartUtils.getInstance(session).getTotalPrice();
+
+        Customer customer = null;
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date birthday = format.parse(birthdaySt);
             customer = new Customer(name, phone, address, email, birthday, null);
-            model.put("customer", customer);
-            model.put("cart", session.getAttribute(CartUtils.SESSION_ATTRIBUTE_CART));
-            model.put("cartTotalPrice", CartUtils.getInstance(session).getTotalPrice());
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return "checkout_summary";
-    }
-
-    @RequestMapping(value = "/bill", method = RequestMethod.POST)
-    public String getBill(Map<String, Object> model, @RequestParam("order_note") String note, HttpSession session) {
-        double totalPrice = CartUtils.getInstance(session).getTotalPrice();
-
         Customer newCustomer = customerService.saveAndFlush(customer);
 
         OrderInfo orderInfo = new OrderInfo(newCustomer, customer.getAddress(), totalPrice, note, new Date(), "Pending", null);
