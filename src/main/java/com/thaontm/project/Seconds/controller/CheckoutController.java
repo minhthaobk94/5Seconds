@@ -7,6 +7,7 @@ import com.thaontm.project.Seconds.model.OrderItem;
 import com.thaontm.project.Seconds.service.CustomerService;
 import com.thaontm.project.Seconds.service.OrderInfoService;
 import com.thaontm.project.Seconds.service.OrderItemService;
+import com.thaontm.project.Seconds.service.ProductService;
 import com.thaontm.project.Seconds.utils.CartUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,14 +37,21 @@ public class CheckoutController {
     @Autowired
     private OrderItemService orderItemService;
 
+    @Autowired
+    ProductService productService;
+
     Customer customer;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String checkout(Map<String, Object> model, HttpSession session) {
-        CartUtils.getInstance(session).checkout();
         model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());
         model.put("cart", session.getAttribute(CartUtils.SESSION_ATTRIBUTE_CART));
+        model.put("cartTotalPrice", CartUtils.getInstance(session).getTotalPrice());
         return "checkout";
+    }
+
+    public CheckoutController() {
+        super();
     }
 
     @RequestMapping(value = "/summary", method = RequestMethod.POST)
@@ -51,9 +59,10 @@ public class CheckoutController {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date birthday = format.parse(birthdaySt);
-            customer = new Customer(name, email, address, phone, birthday, null);
+            customer = new Customer(name, phone, address, email, birthday, null);
             model.put("customer", customer);
             model.put("cart", session.getAttribute(CartUtils.SESSION_ATTRIBUTE_CART));
+            model.put("cartTotalPrice", CartUtils.getInstance(session).getTotalPrice());
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -63,13 +72,20 @@ public class CheckoutController {
     @RequestMapping(value = "/bill", method = RequestMethod.POST)
     public String getBill(Map<String, Object> model, @RequestParam("order_note") String note, HttpSession session) {
         double totalPrice = CartUtils.getInstance(session).getTotalPrice();
-        OrderInfo orderInfo = new OrderInfo(customer, customer.getAddress(), totalPrice, note, new Date(), "Pending", null);
-        customerService.save(customer);
-        orderInfoService.save(orderInfo);
+
+        Customer newCustomer = customerService.saveAndFlush(customer);
+
+        OrderInfo orderInfo = new OrderInfo(newCustomer, customer.getAddress(), totalPrice, note, new Date(), "Pending", null);
+
+        OrderInfo newOrderInfo = orderInfoService.saveAndFlush(orderInfo);
+
         List<CartItemDTO> items = CartUtils.getInstance(session).getCartItems();
         List<OrderItem> orderItems = new ArrayList<>();
+        OrderItem orderItem = new OrderItem();
         for (CartItemDTO cartItemDTO : items) {
-            OrderItem orderItem = new OrderItem(cartItemDTO.getProduct(), orderInfo, cartItemDTO.getQuantity());
+            orderItem.setOrderInfo(newOrderInfo);
+            orderItem.setProduct(productService.findOne(cartItemDTO.getProduct().getId()));
+            orderItem.setQuantity(cartItemDTO.getQuantity());
             orderItems.add(orderItem);
             orderItemService.save(orderItem);
         }

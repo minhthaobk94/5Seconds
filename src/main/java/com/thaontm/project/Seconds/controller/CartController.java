@@ -41,6 +41,8 @@ public class CartController {
     public String removeCartItem(Map<String, Object> model, HttpSession session, @PathVariable("productId") Integer productId) {
         CartUtils.getInstance(session).removeCartItem(productService.findOne(productId));
         model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());
+        model.put("cart", CartUtils.getInstance(session).getCartItems());
+        model.put("cartTotalPrice", CartUtils.getInstance(session).getTotalPrice());
         return "redirect:/cart";
     }
 }

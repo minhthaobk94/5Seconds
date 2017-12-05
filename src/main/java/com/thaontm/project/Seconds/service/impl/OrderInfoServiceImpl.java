@@ -10,6 +10,11 @@ import java.util.List;
 
 @Service
 public class OrderInfoServiceImpl implements OrderInfoService {
+    @Override
+    public OrderInfo saveAndFlush(OrderInfo orderInfo) {
+        return orderRepository.saveAndFlush(orderInfo);
+    }
+
     @Autowired
     OrderRepository orderRepository;
 
@@ -26,5 +31,10 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     @Override
     public void save(OrderInfo orderInfo) {
         orderRepository.save(orderInfo);
+    }
+
+    @Override
+    public List<OrderInfo> findOrderInfoByCustomerId(Integer id) {
+        return orderRepository.findOrderInfoByCustomerId(id);
     }
 }

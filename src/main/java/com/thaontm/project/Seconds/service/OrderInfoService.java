@@ -8,4 +8,6 @@ public interface OrderInfoService {
     List<OrderInfo> findAll();
     OrderInfo findOne(Integer id);
     void save(OrderInfo orderInfo);
+    List<OrderInfo> findOrderInfoByCustomerId(Integer id);
+    OrderInfo saveAndFlush(OrderInfo orderInfo);
 }

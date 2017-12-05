@@ -8,4 +8,5 @@ public interface CustomerService {
     List<Customer> findAll();
     void save(Customer customer);
     Customer findOne(Integer id);
+    Customer saveAndFlush(Customer customer);
 }

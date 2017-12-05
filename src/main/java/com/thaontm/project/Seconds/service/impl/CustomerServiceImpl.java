@@ -27,4 +27,9 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer findOne(Integer id) {
         return customerRepository.findOne(id);
     }
+
+    @Override
+    public Customer saveAndFlush(Customer customer) {
+        return customerRepository.saveAndFlush(customer);
+    }
 }
