@@ -8,5 +8,5 @@ import java.util.List;
 public interface OrderRepository extends CrudRepository<OrderInfo, Integer> {
     List<OrderInfo> findOrderInfoByCustomerId(Integer id);
     OrderInfo saveAndFlush(OrderInfo orderInfo);
-
+List<OrderInfo> findAllByOrderByCreatedDesc();
 }

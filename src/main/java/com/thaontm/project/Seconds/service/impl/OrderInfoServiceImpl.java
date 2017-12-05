@@ -20,7 +20,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 
     @Override
     public List<OrderInfo> findAll() {
-        return (List<OrderInfo>) orderRepository.findAll();
+        return (List<OrderInfo>) orderRepository.findAllByOrderByCreatedDesc();
     }
 
     @Override
