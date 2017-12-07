@@ -4,6 +4,7 @@ import com.thaontm.project.Seconds.dto.CartItemDTO;
 import com.thaontm.project.Seconds.model.Customer;
 import com.thaontm.project.Seconds.model.OrderInfo;
 import com.thaontm.project.Seconds.model.OrderItem;
+import com.thaontm.project.Seconds.service.CategoryService;
 import com.thaontm.project.Seconds.service.CustomerService;
 import com.thaontm.project.Seconds.service.OrderInfoService;
 import com.thaontm.project.Seconds.service.OrderItemService;
@@ -27,6 +28,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/checkout")
 public class CheckoutController {
+    @Autowired
+    private CategoryService categoryService;
 
     @Autowired
     private CustomerService customerService;
@@ -45,27 +48,13 @@ public class CheckoutController {
         model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());
         model.put("cart", session.getAttribute(CartUtils.SESSION_ATTRIBUTE_CART));
         model.put("cartTotalPrice", CartUtils.getInstance(session).getTotalPrice());
+        model.put("categories", categoryService.findAll());
         return "checkout";
     }
 
     public CheckoutController() {
         super();
     }
-
-//    @RequestMapping(value = "/summary", method = RequestMethod.POST)
-//    public String getSummary(Map<String, Object> model, HttpSession session, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("address") String address, @RequestParam("phone") String phone, @RequestParam("birthday") String birthdaySt) {
-//        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//        try {
-//            Date birthday = format.parse(birthdaySt);
-//            customer = new Customer(name, phone, address, email, birthday, null);
-//            model.put("customer", customer);
-//            model.put("cart", session.getAttribute(CartUtils.SESSION_ATTRIBUTE_CART));
-//            model.put("cartTotalPrice", CartUtils.getInstance(session).getTotalPrice());
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        return "checkout_summary";
-//    }
 
     @RequestMapping(value = "/bill", method = RequestMethod.POST)
     public String getBill(Map<String, Object> model, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("address") String address, @RequestParam("phone") String phone, @RequestParam("birthday") String birthdaySt, @RequestParam("order_note") String note, HttpSession session) {
@@ -102,6 +91,7 @@ public class CheckoutController {
         model.put("cartTotalPrice", totalPrice);
         model.put("customer", customer);
         model.put("orderInfo", orderInfo);
+        model.put("categories", categoryService.findAll());
         return "bill";
     }
 }

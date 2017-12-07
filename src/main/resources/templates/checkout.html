@@ -20,56 +20,12 @@
 <!-- Navigation -->
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
-    <div class="row" style="margin-top: 5%">
+    <h2 class="text-center" style="padding: 15px">Checkout</h2>
+    <div class="row">
         <!--Order detail-->
-        <div class="col-6">
-            <!-- Customer Add Form-->
-            <h5>Customer information</h5>
-            <form id="f_addCustomer" action="/checkout/bill" method="post">
-                <div class="form-group row">
-                    <label for="inputCustomerName" class="col-sm-2 col-form-label">Full Name</label>
-                    <div class="col-sm-10">
-                        <input name="name" type="text" class="form-control" id="inputCustomerName" placeholder="Your name is"/>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputEmail" class="col-sm-2 col-form-label">E-mail</label>
-                    <div class="col-sm-10">
-                        <input name="email" type="email" class="form-control" id="inputEmail" placeholder="E-mail"/>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputAddress" class="col-sm-2 col-form-label">Address</label>
-                    <div class="col-sm-10">
-                        <input name="address" type="text" class="form-control" id="inputAddress" placeholder="Phone number"/>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputPhone" class="col-sm-2 col-form-label">Phone</label>
-                    <div class="col-sm-10">
-                        <input name="phone" type="text" class="form-control" id="inputPhone" placeholder="Phone number"/>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputBirthday" class="col-sm-2 col-form-label">Birthday</label>
-                    <div class="col-sm-10">
-                        <input name="birthday" type="date" class="form-control" id="inputBirthday" placeholder="Birthday"/>
-                    </div>
-                </div>
-                <div class="input-group input-group">
-                    <input type="text" class="form-control" placeholder="Write note for order"
-                           aria-describedby="sizing-addon1" name="order_note"/>
-                </div>
-            </form>
-            <div class="form-group row float-right">
-                <div class="col-sm-10">
-                    <span class="btn btn-primary"  onclick="document.getElementById('f_addCustomer').submit();">Continue</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-6">
+        <div class="col-7">
             <!-- Order Items DataTables Card-->
-            <div class="row card mb-3" style="margin-top: 5%">
+            <div class="card mb-3">
                 <div class="card-header">
                     <i class="fa fa-table"></i>
                     Order Items
@@ -108,13 +64,64 @@
                     </div>
                 </div>
             </div>
-            <!--<form id="f_addNote" action="/order/note" method="post" style="margin-bottom: 3%">-->
-                <!--<div class="input-group input-group">-->
-                    <!--<input type="text" class="form-control" placeholder="Write note for order"-->
-                           <!--aria-describedby="sizing-addon1" name="order_note"/>-->
-                    <!--<span type="submit" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></span>-->
-                <!--</div>-->
-            <!--</form>-->
+        </div>
+        <div class="col-5">
+            <!-- Customer Add Form-->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-table"></i>
+                    Customer information
+                </div>
+                <div class="card-body">
+                    <form id="f_addCustomer" action="/checkout/bill" method="post">
+                        <div class="form-group row">
+                            <label for="inputCustomerName" class="col-sm-3 col-form-label">Full Name</label>
+                            <div class="col-sm-9">
+                                <input name="name" type="text" class="form-control" id="inputCustomerName"
+                                       placeholder="Your name is"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputEmail" class="col-sm-3 col-form-label">E-mail</label>
+                            <div class="col-sm-9">
+                                <input name="email" type="email" class="form-control" id="inputEmail"
+                                       placeholder="E-mail"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputAddress" class="col-sm-3 col-form-label">Address</label>
+                            <div class="col-sm-9">
+                                <input name="address" type="text" class="form-control" id="inputAddress"
+                                       placeholder="Phone number"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPhone" class="col-sm-3 col-form-label">Phone</label>
+                            <div class="col-sm-9">
+                                <input name="phone" type="text" class="form-control" id="inputPhone"
+                                       placeholder="Phone number"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputBirthday" class="col-sm-3 col-form-label">Birthday</label>
+                            <div class="col-sm-9">
+                                <input name="birthday" type="date" class="form-control" id="inputBirthday"
+                                       placeholder="Birthday"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="order_note" class="col-sm-3 col-form-label">Note</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="order_note"
+                                          placeholder="Write note for order" name="order_note" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="form-group float-right pull-right">
+                <button class="btn btn-primary" onclick="document.getElementById('f_addCustomer').submit();">Continue</button>
+            </div>
         </div>
     </div>
 </div>
@@ -128,11 +135,11 @@
 <!-- Custom scripts for all pages-->
 <script src="../../js/sb-admin.min.js" th:src="@{/js/sb-admin.min.js}"></script>
 <!-- Page level plugin JavaScript-->
-<script src="../../js/jquery.dataTables.js" th:src="@{/js/jquery.dataTables.js}"></script>
-<script src="../../js/dataTables.bootstrap4.js" th:src="@{/js/dataTables.bootstrap4.js}"></script>
+<!--<script src="../../js/jquery.dataTables.js" th:src="@{/js/jquery.dataTables.js}"></script>-->
+<!--<script src="../../js/dataTables.bootstrap4.js" th:src="@{/js/dataTables.bootstrap4.js}"></script>-->
 <!-- Custom scripts for all pages-->
 <script src="../../js/sb-admin.min.js" th:src="@{/js/sb-admin.min.js}"></script>
 <!-- Custom scripts for this page-->
-<script src="../../js/sb-admin-datatables.min.js" th:src="@{/js/sb-admin-datatables.min.js}"></script>
+<!--<script src="../../js/sb-admin-datatables.min.js" th:src="@{/js/sb-admin-datatables.min.js}"></script>-->
 </body>
 </html>

@@ -1,5 +1,7 @@
 package com.thaontm.project.Seconds.model;
 
+import org.thymeleaf.expression.Strings;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -74,6 +76,9 @@ public class Product {
     }
 
     public String getImgUrl() {
+        if (imgUrl == null || imgUrl.length() == 0) {
+            return "/images/default-product.jpg";
+        }
         return imgUrl;
     }
 

@@ -57,31 +57,31 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
+    </div>
+    <!-- /.row -->
 
-        <div class="row">
-
-            <div class="col-lg-3 col-md-4 col-sm-6" th:each="product : ${products}">
-                <div class="card h-100">
-                    <a th:href="@{'/products/' + ${product.getId()}}">
-                        <img class="card-img-top" th:src="${product.getImgUrl()}" alt=""/>
-                    </a>
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <a th:href="@{'/products/' + ${product.getId()}}"
-                               th:text="${product.getProductName()}"></a>
-                        </h4>
-                        <h5 th:text="${product.getPrice()}"></h5>
-                        <p class="card-text"  th:text="${product.getDescription()}"></p>
-                        <a id="btnAddToCart" class="btn btn-outline-success float-right" th:href="@{'/addToCart/' + ${product.getId()}}"><i class="fa fa-fw fa-shopping-cart"></i>Add to cart</a>
-                    </div>
+    <div class="row">
+        <div class="col-lg-3" style="margin-bottom: 30px" th:each="product : ${products}">
+            <div class="card h-100">
+                <a th:href="@{'/products/' + ${product.getId()}}">
+                    <img class="card-img-top" th:src="${product.getImgUrl()}" alt=""/>
+                </a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a th:href="@{'/products/' + ${product.getId()}}"
+                           th:text="${product.getProductName()}"></a>
+                    </h4>
+                    <h5 th:text="${product.getPrice()}"></h5>
+                    <p class="card-text"  th:text="${product.getDescription()}"></p>
+                    <a id="btnAddToCart" class="btn btn-outline-success float-right" th:href="@{'/addToCart/' + ${product.getId()}}"><i class="fa fa-fw fa-shopping-cart"></i>Add to cart</a>
                 </div>
             </div>
-
         </div>
-        <!-- /.row -->
 
     </div>
     <!-- /.row -->
+
+    <div class="row" style="margin-bottom: 40px"></div>
 
 </div>
 <!-- /.container -->

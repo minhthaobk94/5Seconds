@@ -1,5 +1,6 @@
 package com.thaontm.project.Seconds.controller;
 
+import com.thaontm.project.Seconds.service.CategoryService;
 import com.thaontm.project.Seconds.service.CustomerService;
 import com.thaontm.project.Seconds.service.ProductService;
 import com.thaontm.project.Seconds.utils.CartUtils;
@@ -16,6 +17,9 @@ import java.util.Map;
 @Controller
 public class CartController {
     @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
     private ProductService productService;
 
     @Autowired
@@ -26,6 +30,7 @@ public class CartController {
         model.put("cart", CartUtils.getInstance(session).getCartItems());
         model.put("cartTotalPrice", CartUtils.getInstance(session).getTotalPrice());
         model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());
+        model.put("categories", categoryService.findAll());
         return "cart";
     }
 
