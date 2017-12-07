@@ -32,9 +32,4 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     public void save(OrderInfo orderInfo) {
         orderRepository.save(orderInfo);
     }
-
-    @Override
-    public List<OrderInfo> findOrderInfoByCustomerId(Integer id) {
-        return orderRepository.findOrderInfoByCustomerId(id);
-    }
 }

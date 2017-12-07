@@ -1,7 +1,5 @@
 package com.thaontm.project.Seconds.model;
 
-import com.thaontm.project.Seconds.utils.StringUtils;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -88,8 +86,8 @@ public class OrderInfo {
         this.note = note;
     }
 
-    public String getCreated() {
-        return new StringUtils().getCurrentDateTime(created);
+    public Date getCreated() {
+        return created;
     }
 
     public void setCreated(Date created) {
