@@ -1,5 +1,5 @@
 <header xmlns:th="http://www.thymeleaf.org" th:name="header">
-    <nav class="navbar fixed-top     navbar-expand-xl navbar-dark bg-dark">
+    <nav class="navbar fixed-top navbar-expand-xl navbar-dark bg-dark">
         <div class="container">
             <div class="col-xl-4">
                 <a class="navbar-brand text-warning" href="/"><h3>5Seconds</h3></a>
@@ -65,11 +65,11 @@
             </div>
         </div>
     </nav>
-    <nav style="background: #ffc107; color: #212529; padding-top: 72px"
+    <nav style="background: #ffc107; color: #343a40; padding-top: 72px"
          class="nav nav-pills navbar-light navbar navbar-light justify-content-center">
         <a class="nav-link" th:each="category : ${categories}"
            th:classappend="${category.getId() == catId ||  category.getId() == categoryId ? 'active' : ''}"
            th:href=" @{'/products/category/' + ${category.getId()}}"
-           th:text="${category.getTitle()}"></a>
+           th:text="${category.getTitle()}"/>
     </nav>
 </header>

@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
@@ -17,7 +16,7 @@
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
 
     <!-- Custom styles for this template -->
-    <link href="../../css/portfolio-item.css" rel="stylesheet"/>
+    <!--<link href="../../css/portfolio-item.css" rel="stylesheet"/>-->
 
 </head>
 
@@ -28,30 +27,86 @@
 
 <!-- Page Content -->
 <div class="container">
-    <!--Information-->
-    <div class="row" style="margin-top: 5%">
-        <h1 th:text="'Order #' + ${orderInfo.getId()}"></h1>
-        <!--Order detail-->
-        <div class="col-6">
-            <!--Summary Shipping Info -->
-            <div class="card">
-                <div class="card-block">
-                    <h4 class="card-title">Shipping Infomation</h4>
+    <div class="row">
+        <div class="col-lg-4">
+            <form style="padding: 15px" id="f_searchOrder" action="/order/search/" th:value="${orderId}" method="post">
+                <div class="input-group">
+                    <input type="text" name="orderId" class="form-control" placeholder="Enter #OrderId"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-success" type="button" onclick="document.getElementById('f_searchOrder').submit();">Search!</button>
+                    </span>
                 </div>
-                <div class="card-block">
-                    <h5 th:text="${orderInfo.getCustomer().getCustomer_name()}"></h5>
-                    <h5 th:text="${orderInfo.getCustomer().getAddress()}"></h5>
-                    <h5 th:text="${orderInfo.getCustomer().getEmail()}"></h5>
-                    <h5 th:text="${orderInfo.getCustomer().getPhone()}"></h5>
-                    <h5 th:text="${orderInfo.getCustomer().getBirthday()}"></h5>
+            </form>
+        </div>
+        <div class="col-lg-8">
+            <h2 th:if="${orderInfo}" class="text-left" style="padding: 15px">
+                #Order Information
+                <span th:text="${orderInfo.getId()}" class="badge badge-danger"></span>
+                <span th:text="${orderInfo.getStatus()}" class="badge badge-primary"></span>
+            </h2>
+        </div>
+    </div>
+    <!--Information-->
+    <div th:if="${orderInfo}" class="row">
+        <!--Order detail-->
+        <div class="col-5">
+            <!--Summary Shipping Info -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-info-circle"></i>
+                    Shipping Infomation
+                </div>
+                <div class="card-body">
+                    <form id="f_addCustomer" action="/checkout/bill" method="post">
+                        <div class="form-group row">
+                            <label for="customerName" class="col-sm-3 col-form-label">Full Name</label>
+                            <div class="col-sm-9">
+                                        <span th:text="${orderInfo.getCustomer().getCustomer_name()}"
+                                              class="form-control"
+                                              id="customerName"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="customerAddress" class="col-sm-3 col-form-label">Address</label>
+                            <div class="col-sm-9">
+                                        <span th:text="${orderInfo.getCustomer().getAddress()}" class="form-control"
+                                              id="customerAddress"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="customerEmail" class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-9">
+                                        <span th:text="${orderInfo.getCustomer().getEmail()}" class="form-control"
+                                              id="customerEmail"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="customerPhone" class="col-sm-3 col-form-label">Phone</label>
+                            <div class="col-sm-9">
+                                <span th:text="${orderInfo.getCustomer().getPhone()}" class="form-control"
+                                      id="customerPhone"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="customerBirthday" class="col-sm-3 col-form-label">Birthday</label>
+                            <div class="col-sm-9">
+                                        <span th:text="${orderInfo.getCustomer().getBirthday()}" class="form-control"
+                                              id="customerBirthday"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="order_note" class="col-sm-3 col-form-label">Note</label>
+                            <div class="col-sm-9">
+                                <span th:text="${orderInfo.getNote()}" class="form-control" id="order_note"></span>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <!--Note-->
-            <h6 th:text="${orderInfo.getNote()}"></h6>
         </div>
-        <div class="col-6">
+        <div class="col-7">
             <!-- Order Items DataTables Card-->
-            <div class="row card mb-3" style="margin-top: 5%">
+            <div class="card mb-3">
                 <div class="card-header">
                     <i class="fa fa-table"></i>
                     Order Items
@@ -91,6 +146,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div th:unless="${orderInfo}" style="padding: 15px">
+        <h1>No results found !!!</h1>
     </div>
 </div>
 <!-- /.container -->

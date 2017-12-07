@@ -17,7 +17,7 @@
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
 
     <!-- Custom styles for this template -->
-    <link href="../../css/portfolio-item.css" rel="stylesheet"/>
+    <!--<link href="../../css/portfolio-item.css" rel="stylesheet"/>-->
 
 </head>
 
@@ -28,11 +28,11 @@
 
 <!-- Page Content -->
 <div class="container">
-        <form id="f_searchOrder" action="/order/search/" th:value="${orderId}" method="post" style="margin-bottom: 3%">
+        <form id="f_searchOrder" action="/order/search/" th:value="${orderId}" method="post">
             <div class="input-group input-group">
                 <input type="text" class="form-control" placeholder="Enter order ID"
                        aria-describedby="sizing-addon1" name="orderId"/>
-                <span type="submit" class="btn btn-success" onclick="document.getElementById('f_searchOrder').submit();"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                <span class="btn btn-success" onclick="document.getElementById('f_searchOrder').submit();"><i class="fa fa-plus" aria-hidden="true"></i></span>
             </div>
         </form>
 </div>

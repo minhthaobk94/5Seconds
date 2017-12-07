@@ -1,6 +1,7 @@
 package com.thaontm.project.Seconds.controller;
 
 import com.thaontm.project.Seconds.model.Product;
+import com.thaontm.project.Seconds.service.CategoryService;
 import com.thaontm.project.Seconds.service.ProductService;
 import com.thaontm.project.Seconds.utils.CartUtils;
 import com.thaontm.project.Seconds.utils.Constants;
@@ -20,6 +21,9 @@ import java.util.Map;
 
 @Controller
 public class SearchController {
+    @Autowired
+    private CategoryService categoryService;
+
     @Autowired
     private ProductService productService;
 
@@ -42,6 +46,7 @@ public class SearchController {
             model.put("totalPages", PaginationUtils.calculateTotalPages(productService.findAll().size(), Constants.PAGE_SIZE));
            model.put("products", products);
         }
+        model.put("categories", categoryService.findAll());
         model.put("pageSize", Constants.PAGE_SIZE);
         model.put("query", q);
         model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());

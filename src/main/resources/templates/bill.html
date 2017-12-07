@@ -12,38 +12,73 @@
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
     <!-- Custom fonts for this template-->
     <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
-    <!-- Custom styles for this template-->
-    <!--<link th:href="@{/css/sb-admin.min.css}" rel="stylesheet"/>-->
 </head>
 
 <body>
 <!-- Navigation -->
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
-    <div class="row" style="margin-top: 5%">
-        <h1 th:text="'Your order ID is ' + ${orderInfo.getId()}"></h1>
+    <h2 class="text-center" style="padding: 15px">#Order Information <span th:text="${orderInfo.getId()}"
+                                                                           class="badge badge-danger"
+                                                                           id="orderId"></span></h2>
+    <div class="row">
         <!--Order detail-->
-        <div class="col-6">
+        <div class="col-lg-5">
             <!--Summary Shipping Info -->
-            <div class="card">
-                <div class="card-block">
-                    <h4 class="card-title">Shipping Infomation</h4>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-info-circle"></i>
+                    Shipping Infomation
                 </div>
-                <div class="card-block">
-                    <h5 th:text="${customer.getCustomer_name()}"></h5>
-                    <h5 th:text="${customer.getAddress()}"></h5>
-                    <h5 th:text="${customer.getEmail()}"></h5>
-                    <h5 th:text="${customer.getPhone()}"></h5>
-                    <h5 th:text="${customer.getBirthday()}"></h5>
-                    <!--<a th:href="@{/checkout/}">Other shipping address</a>-->
+                <div class="card-body">
+                    <form id="f_addCustomer" action="/checkout/bill" method="post">
+                        <div class="form-group row">
+                            <label for="customerName" class="col-sm-3 col-form-label">Full Name</label>
+                            <div class="col-sm-9">
+                                        <span th:text="${customer.getCustomer_name()}" class="form-control"
+                                              id="customerName"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="customerAddress" class="col-sm-3 col-form-label">Address</label>
+                            <div class="col-sm-9">
+                                        <span th:text="${customer.getAddress()}" class="form-control"
+                                              id="customerAddress"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="customerEmail" class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-9">
+                                        <span th:text="${customer.getEmail()}" class="form-control"
+                                              id="customerEmail"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="customerPhone" class="col-sm-3 col-form-label">Phone</label>
+                            <div class="col-sm-9">
+                                <span th:text="${customer.getPhone()}" class="form-control" id="customerPhone"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="customerBirthday" class="col-sm-3 col-form-label">Birthday</label>
+                            <div class="col-sm-9">
+                                        <span th:text="${customer.getBirthday()}" class="form-control"
+                                              id="customerBirthday"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="order_note" class="col-sm-3 col-form-label">Note</label>
+                            <div class="col-sm-9">
+                                <span th:text="${orderInfo.getNote()}" class="form-control" id="order_note"></span>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <!--Note-->
-            <h6 th:text="${note}"></h6>
         </div>
-        <div class="col-6">
+        <div class="col-lg-7">
             <!-- Order Items DataTables Card-->
-            <div class="row card mb-3" style="margin-top: 5%">
+            <div class=" card mb-3">
                 <div class="card-header">
                     <i class="fa fa-table"></i>
                     Order Items
@@ -53,7 +88,6 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th hidden="hidden">Product ID</th>
                                 <th>Product Name</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
@@ -62,7 +96,6 @@
                             </thead>
                             <tfoot>
                             <tr>
-                                <th hidden="hidden">Product ID</th>
                                 <th>Product Name</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
@@ -71,20 +104,21 @@
                             </tfoot>
                             <tbody>
                             <tr th:each="orderItem : ${cart}">
-                                <td style="display: none;" th:text="${orderItem.getProduct().getId()}"></td>
                                 <td th:text="${orderItem.getProduct().getProductName()}"></td>
                                 <td th:text="${orderItem.getProduct().getPrice()}"></td>
                                 <td th:text="${orderItem.getQuantity()}"></td>
-                                <td th:text="${(orderItem.getProduct().getPrice())*(orderItem.getQuantity())}"></td>
+                                <td th:text="${'$' + #numbers.formatDecimal((orderItem.getProduct().getPrice())*(orderItem.getQuantity()), 0, 0)}"></td>
                             </tr>
                             </tbody>
                             <tr>
-                                <td>  </td>
-                                <td>  </td>
-                                <td>  </td>
+                                <td></td>
+                                <td></td>
                                 <td><h4>Total</h4></td>
-                                <td class="text-right" id="totalPrice"><h3><strong
-                                        th:text="${#numbers.formatDecimal(cartTotalPrice, 0, 0)}"></strong></h3></td>
+                                <td id="totalPrice">
+                                    <h3><strong class="badge badge-danger"
+                                                th:text="${'$' + #numbers.formatDecimal(cartTotalPrice, 0, 0)}"></strong>
+                                    </h3>
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -102,12 +136,7 @@
 <script src="../../js/jquery.easing.min.js" th:src="@{/js/jquery.easing.min.js}"></script>
 <!-- Custom scripts for all pages-->
 <script src="../../js/sb-admin.min.js" th:src="@{/js/sb-admin.min.js}"></script>
-<!-- Page level plugin JavaScript-->
-<script src="../../js/jquery.dataTables.js" th:src="@{/js/jquery.dataTables.js}"></script>
-<script src="../../js/dataTables.bootstrap4.js" th:src="@{/js/dataTables.bootstrap4.js}"></script>
 <!-- Custom scripts for all pages-->
 <script src="../../js/sb-admin.min.js" th:src="@{/js/sb-admin.min.js}"></script>
-<!-- Custom scripts for this page-->
-<script src="../../js/sb-admin-datatables.min.js" th:src="@{/js/sb-admin-datatables.min.js}"></script>
 </body>
 </html>

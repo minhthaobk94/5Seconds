@@ -90,7 +90,7 @@ public class CheckoutController {
         model.put("cart", session.getAttribute(CartUtils.SESSION_ATTRIBUTE_CART));
         model.put("cartTotalPrice", totalPrice);
         model.put("customer", customer);
-        model.put("orderInfo", orderInfo);
+        model.put("orderInfo", newOrderInfo);
         model.put("categories", categoryService.findAll());
         return "bill";
     }
