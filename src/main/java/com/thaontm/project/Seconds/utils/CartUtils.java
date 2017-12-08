@@ -65,14 +65,6 @@ public class CartUtils {
         return totalPrice;
     }
 
-    public void checkout() {
-        if (this.session != null) {
-            this.cartItems = new ArrayList<>();
-            session.setAttribute(SESSION_ATTRIBUTE_CART, this.cartItems);
-            getTotalPrice();
-        }
-    }
-
     public void removeCartItem(Product product) {
         CartItemDTO cartItemDTO = getCartItem(product);
         cartItems.remove(cartItemDTO);

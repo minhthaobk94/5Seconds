@@ -29,7 +29,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-4">
-            <form style="padding: 15px" id="f_searchOrder" action="/order/search/" th:value="${orderId}" method="post">
+            <form style="padding: 15px" id="f_searchOrder" action="/order/search/" th:value="${orderId}" method="get">
                 <div class="input-group">
                     <input type="text" name="orderId" class="form-control" placeholder="Enter #OrderId"/>
                     <span class="input-group-btn">
@@ -40,7 +40,7 @@
         </div>
         <div class="col-lg-8">
             <h2 th:if="${orderInfo}" class="text-left" style="padding: 15px">
-                #Order Information
+                #OrderId
                 <span th:text="${orderInfo.getId()}" class="badge badge-danger"></span>
                 <span th:text="${orderInfo.getStatus()}" class="badge badge-primary"></span>
             </h2>

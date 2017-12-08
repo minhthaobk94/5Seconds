@@ -30,14 +30,19 @@ public class OrderController {
         return "order_history";
     }
 
-    @RequestMapping(value = "/search/", method = RequestMethod.POST)
-    public String searchOrder(Map<String, Object> model, @RequestParam("orderId") Integer orderId, HttpSession session) {
+    @RequestMapping(value = "/search/", method = RequestMethod.GET)
+    public String searchOrder(Map<String, Object> model, @RequestParam("orderId") String orderIdSt, HttpSession session) {
         model.put("categories", categoryService.findAll());
-        model.put("orderInfo", orderInfoService.findOne(orderId));
         model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());
         model.put("cart", CartUtils.getInstance(session).getCartItems());
         model.put("cartTotalPrice", CartUtils.getInstance(session).getTotalPrice());
-        model.put("total", orderInfoService.findOne(orderId).getTotal());
+
+        try {
+            model.put("orderInfo", orderInfoService.findOne(Integer.parseInt(orderIdSt)));
+            model.put("total", orderInfoService.findOne(Integer.parseInt(orderIdSt)).getTotal());
+        } catch (Exception e) {
+            model.put("orderInfo", null);
+        }
         return "order_history";
     }
 }
