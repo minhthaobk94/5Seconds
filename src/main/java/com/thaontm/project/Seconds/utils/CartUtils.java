@@ -68,6 +68,8 @@ public class CartUtils {
     public void checkout() {
         if (this.session != null) {
             this.cartItems = new ArrayList<>();
+            session.setAttribute(SESSION_ATTRIBUTE_CART, this.cartItems);
+            getTotalPrice();
         }
     }
 

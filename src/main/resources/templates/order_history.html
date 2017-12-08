@@ -141,6 +141,16 @@
                                 <td th:text="${(orderItem.getProduct().getPrice())*(orderItem.getQuantity())}"></td>
                             </tr>
                             </tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td><h4>Total</h4></td>
+                                <td id="totalPrice">
+                                    <h3><strong class="badge badge-danger"
+                                                th:text="${'$' + #numbers.formatDecimal(total, 0, 0)}"></strong>
+                                    </h3>
+                                </td>
+                            </tr>
                         </table>
                     </div>
                 </div>

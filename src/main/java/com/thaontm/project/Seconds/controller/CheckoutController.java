@@ -86,12 +86,15 @@ public class CheckoutController {
         }
         orderInfo.setOrderItems(orderItems);
         model.put("note", note);
-        model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());
-        model.put("cart", session.getAttribute(CartUtils.SESSION_ATTRIBUTE_CART));
-        model.put("cartTotalPrice", totalPrice);
+        model.put("cartOrder", session.getAttribute(CartUtils.SESSION_ATTRIBUTE_CART));
+        model.put("total", totalPrice);
         model.put("customer", customer);
         model.put("orderInfo", newOrderInfo);
         model.put("categories", categoryService.findAll());
+        CartUtils.getInstance(session).checkout();
+        model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());
+        model.put("cartTotalPrice", CartUtils.getInstance(session).getTotalPrice());
+        model.put("cart", session.getAttribute(CartUtils.SESSION_ATTRIBUTE_CART));
         return "bill";
     }
 }

@@ -103,7 +103,7 @@
                             </tr>
                             </tfoot>
                             <tbody>
-                            <tr th:each="orderItem : ${cart}">
+                            <tr th:each="orderItem : ${cartOrder}">
                                 <td th:text="${orderItem.getProduct().getProductName()}"></td>
                                 <td th:text="${orderItem.getProduct().getPrice()}"></td>
                                 <td th:text="${orderItem.getQuantity()}"></td>
@@ -116,7 +116,7 @@
                                 <td><h4>Total</h4></td>
                                 <td id="totalPrice">
                                     <h3><strong class="badge badge-danger"
-                                                th:text="${'$' + #numbers.formatDecimal(cartTotalPrice, 0, 0)}"></strong>
+                                                th:text="${'$' + #numbers.formatDecimal(total, 0, 0)}"></strong>
                                     </h3>
                                 </td>
                             </tr>

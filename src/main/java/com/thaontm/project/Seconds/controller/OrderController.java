@@ -37,6 +37,7 @@ public class OrderController {
         model.put("itemsQuantity", CartUtils.getInstance(session).getItemsQuantity());
         model.put("cart", CartUtils.getInstance(session).getCartItems());
         model.put("cartTotalPrice", CartUtils.getInstance(session).getTotalPrice());
+        model.put("total", orderInfoService.findOne(orderId).getTotal());
         return "order_history";
     }
 }
