@@ -31,7 +31,7 @@
             </li>
         </ol>
         <!-- Customer Add Form-->
-        <form id="f_updateProduct" action="/admin/product/update/{id}" th:value="${product}" method="post">
+        <form id="f_updateProduct" enctype="multipart/form-data" action="/admin/product/update/{id}" th:value="${product}" method="post">
             <div class="form-group row">
                 <input type="hidden" name="id" th:value="${product.getId()}"/>
             </div>

@@ -54,14 +54,20 @@ public class AdminProductController {
     }
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    public String updateProduct(@RequestParam("id") Integer id, @RequestParam("name") String productName, @RequestParam("description") String description, @RequestParam("url") String imageUrl, @RequestParam("price") double price, @RequestParam("category") String catTitle) {
+    public String updateProduct(@RequestParam("id") Integer id, @RequestParam("name") String productName, @RequestParam("description") String description, @RequestParam("url") MultipartFile imageFile, @RequestParam("price") double price, @RequestParam("category") String catTitle) {
+        Product oldProduct = productService.findOne(id);
         Product product = new Product();
         product.setId(id);
         product.setDescription(description);
         product.setProductName(productName);
-        product.setImgUrl(imageUrl);
         product.setPrice(price);
         product.setCategory(categoryService.findByTitle(catTitle));
+        if (imageFile == null || imageFile.isEmpty()) {
+            product.setImgUrl(oldProduct.getImgUrl());
+        } else {
+            product.setImgUrl(new StringBuilder(Constants.DEFAULT_IMAGE_URL).append(imageFile.getOriginalFilename()).toString());
+        }
+
         productService.save(product);
         return "redirect:/admin/product/";
     }
