@@ -2,13 +2,22 @@ package com.thaontm.project.Seconds.controller;
 
 import com.thaontm.project.Seconds.model.Product;
 import com.thaontm.project.Seconds.service.CategoryService;
+import com.thaontm.project.Seconds.storage.StorageService;
 import com.thaontm.project.Seconds.utils.CartUtils;
+import com.thaontm.project.Seconds.utils.Constants;
 import com.thaontm.project.Seconds.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
@@ -18,6 +27,9 @@ import java.util.Set;
 public class WelcomeController {
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private StorageService storageService;
 
     StringUtils utils = new StringUtils();
 
@@ -49,5 +61,16 @@ public class WelcomeController {
         model.put("cart", CartUtils.getInstance(session).getCartItems());
         model.put("cartTotalPrice", CartUtils.getInstance(session).getTotalPrice());
         return "welcome";
+    }
+
+    @GetMapping(Constants.DEFAULT_IMAGE_URL + "{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+
+        Resource file = storageService.loadAsResource(filename);
+        return ResponseEntity
+            .ok()
+            .contentType(MediaType.IMAGE_JPEG)
+            .body(file);
     }
 }

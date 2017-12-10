@@ -3,18 +3,24 @@ package com.thaontm.project.Seconds.controller.admin;
 import com.thaontm.project.Seconds.model.Product;
 import com.thaontm.project.Seconds.service.CategoryService;
 import com.thaontm.project.Seconds.service.ProductService;
+import com.thaontm.project.Seconds.storage.StorageService;
+import com.thaontm.project.Seconds.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
 @Controller
 @RequestMapping("/admin/product")
 public class AdminProductController {
+    @Autowired
+    private StorageService storageService;
+
     @Autowired
     private ProductService productService;
 
@@ -34,8 +40,9 @@ public class AdminProductController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addProduct(@RequestParam("name") String productName, @RequestParam("description") String description, @RequestParam("url") String imageUrl, @RequestParam("price") double price, @RequestParam("category") String catTitle) {
-        productService.save(new Product(categoryService.findByTitle(catTitle), productName, description, imageUrl, price, null));
+    public String addProduct(@RequestParam("name") String productName, @RequestParam("description") String description, @RequestParam("imageFile") MultipartFile imageFile, @RequestParam("price") double price, @RequestParam("category") String catTitle) {
+        storageService.store(imageFile);
+        productService.save(new Product(categoryService.findByTitle(catTitle), productName, description, new StringBuilder(Constants.DEFAULT_IMAGE_URL).append(imageFile.getOriginalFilename()).toString(), price, null));
         return "redirect:/admin/product/";
     }
 
